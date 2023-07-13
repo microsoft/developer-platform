@@ -1,0 +1,86 @@
+name: Release API
+
+on:
+  push:
+    branches: [main]
+    paths:
+      # the version number changes in version.txt
+      # so only release if that file has changed
+      - "src/version.txt"
+
+env:
+  IMAGE_REGISTRY: ghcr.io
+
+jobs:
+  build:
+    name: Create new Release
+    if: "!contains(join(github.event.commits.*.message), '+norelease')"
+    # if: "contains(join(github.event.commits.*.message), '+release')"
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup
+        id: setup
+        run: |
+          BUILD_DATE="`date -u +"%Y-%m-%dT%H:%M:%SZ"`" && echo "date=$BUILD_DATE" >> $GITHUB_OUTPUT
+          IMAGE_VERSION=$(cat ./src/version.txt) && echo "version=$IMAGE_VERSION" >> $GITHUB_OUTPUT
+
+      - uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: "7.0.x"
+
+      - name: Build Solution
+        working-directory: ./src
+        run: dotnet build Microsoft.Developer.sln -c Release -p:VersionPrefix="${{ steps.setup.outputs.version }}" -p:AssemblyVersion="${{ steps.setup.outputs.version }}" -p:FileVersion="${{ steps.setup.outputs.version }}" -p:IncludeSymbols=true
+
+      - name: Publish API
+        working-directory: ./src/Microsoft.Developer.Api
+        run: dotnet publish Microsoft.Developer.Api.csproj -o publish -c Release -p:VersionPrefix="${{ steps.setup.outputs.version }}" -p:AssemblyVersion="${{ steps.setup.outputs.version }}" -p:FileVersion="${{ steps.setup.outputs.version }}" -p:IncludeSymbols=true --no-build
+
+      # - name: Set up QEMU
+      #   uses: docker/setup-qemu-action@v2
+
+      # - name: Set up Docker Buildx
+      #   uses: docker/setup-buildx-action@v2
+
+      - name: Docker Login
+        uses: docker/login-action@v2
+        with:
+          registry: ${{ env.IMAGE_REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v3
+        env:
+          IMAGE_REPOSITORY: ${{ github.repository }}
+          BUILD_DATE: ${{ steps.setup.outputs.date }}
+          IMAGE_VERSION: ${{ steps.setup.outputs.version }}
+        with:
+          context: ./src/Microsoft.Developer.Api
+          file: ./src/Microsoft.Developer.Api/Dockerfile
+          # platforms: linux/amd64
+          push: ${{ github.event_name != 'pull_request' }}
+          build-args: |
+            BUILD_DATE=${{ env.BUILD_DATE }}
+            IMAGE_VERSION=${{ env.IMAGE_VERSION }}
+          tags: |
+            ${{ env.IMAGE_REGISTRY }}/${{ env.IMAGE_REPOSITORY }}/api:latest
+            ${{ env.IMAGE_REGISTRY }}/${{ env.IMAGE_REPOSITORY }}/api:${{ env.IMAGE_VERSION }}
+
+      - name: Create Release
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const releaseResult = await github.rest.repos.createRelease({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              tag_name: 'v${{ steps.setup.outputs.version }}',
+              name: 'v${{ steps.setup.outputs.version }}',
+              prerelease: true,
+              body: 'prerelease'
+            });
+
+            const release = releaseResult.data;
