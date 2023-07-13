@@ -396,3 +396,12 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+
+.local
+.DS_Store
+appsettings.Development.json
+
+local.bicep
+provider.bicep
+.env.development
+deploy
