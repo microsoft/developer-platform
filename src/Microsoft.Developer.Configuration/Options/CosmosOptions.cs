@@ -1,0 +1,17 @@
+/**
+ *  Copyright (c) Microsoft Corporation.
+ *  Licensed under the MIT License.
+ */
+
+namespace Microsoft.Developer.Configuration.Options;
+
+public class CosmosOptions
+{
+    public const string Section = "Cosmos";
+
+    public string Endpoint { get; set; } = string.Empty;
+
+    public string DatabaseName { get; set; } = "MSDevs";
+
+    public string? ConnectionString { get; set; } = null;
+}

@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Azure.Cosmos" Version="3.35.2" />
+    <PackageReference Include="Microsoft.Extensions.Caching.Cosmos" Version="1.5.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Microsoft.Developer.Configuration\Microsoft.Developer.Configuration.csproj" />
+    <ProjectReference Include="..\Microsoft.Developer.Entities\Microsoft.Developer.Entities.csproj" />
+    <ProjectReference Include="..\Microsoft.Developer.Entities.Serialization\Microsoft.Developer.Entities.Serialization.csproj" />
+  </ItemGroup>
+
+</Project>
