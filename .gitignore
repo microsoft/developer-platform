@@ -398,6 +398,7 @@ FodyWeavers.xsd
 *.sln.iml
 
 .local
+docs/.local
 .DS_Store
 appsettings.Development.json
 
@@ -405,3 +406,8 @@ local.bicep
 provider.bicep
 .env.development
 deploy
+
+openapi/openapi.json
+openapi/openapi.yaml
+
+sdks/**

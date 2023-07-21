@@ -31,6 +31,12 @@ jobs:
         with:
           dotnet-version: "7.0.x"
 
+      # Everything added to release_assets will be published as an asset on the release
+      # - name: Create Assets Directory
+      #   uses: actions/github-script@v6
+      #   with:
+      #     script: await io.mkdirP('release_assets')
+
       - name: Build Solution
         working-directory: ./src
         run: dotnet build Microsoft.Developer.sln -c Release -p:VersionPrefix="${{ steps.setup.outputs.version }}" -p:AssemblyVersion="${{ steps.setup.outputs.version }}" -p:FileVersion="${{ steps.setup.outputs.version }}" -p:IncludeSymbols=true
@@ -38,6 +44,9 @@ jobs:
       - name: Publish API
         working-directory: ./src/Microsoft.Developer.Api
         run: dotnet publish Microsoft.Developer.Api.csproj -o publish -c Release -p:VersionPrefix="${{ steps.setup.outputs.version }}" -p:AssemblyVersion="${{ steps.setup.outputs.version }}" -p:FileVersion="${{ steps.setup.outputs.version }}" -p:IncludeSymbols=true --no-build
+
+      # - name: Create OpenAPI & SDKs
+      #   run: bash ./tools/sdks.sh ./publish/Microsoft.Developer.Api.dll
 
       # - name: Set up QEMU
       #   uses: docker/setup-qemu-action@v2
