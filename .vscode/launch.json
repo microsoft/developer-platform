@@ -1,0 +1,11 @@
+{
+    "configurations": [
+        {
+            "name": "API",
+            "type": "dotnet",
+            "request": "launch",
+            "projectPath": "${workspaceFolder}/src/Microsoft.Developer.Api/Microsoft.Developer.Api.csproj",
+            "internalConsoleOptions": "openOnSessionStart"
+        }
+    ]
+}

@@ -1,0 +1,32 @@
+{
+    "version": "2.0.0",
+    "type": "shell",
+    "options": {
+        "cwd": "${workspaceFolder}"
+    },
+    "problemMatcher": [],
+    "presentation": {
+        "showReuseMessage": false,
+    },
+    "args": [],
+    "inputs": [
+        {
+            "id": "providerName",
+            "type": "pickString",
+            "description": "Provider.",
+            "default": "MSGraph",
+            "options": [
+                "Azure",
+                "DevCenter",
+                "GitHub",
+                "MSGraph"
+            ]
+        },
+        {
+            "id": "version",
+            "type": "promptString",
+            "description": "Version this release."
+        }
+    ],
+    "tasks": []
+}
