@@ -411,3 +411,5 @@ openapi/openapi.json
 openapi/openapi.yaml
 
 sdks/**
+
+schemas/**
