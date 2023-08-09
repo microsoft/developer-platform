@@ -10,7 +10,7 @@ namespace Microsoft.Developer.Data.CosmosDb;
 
 public static class CosmosDbExtensions
 {
-    internal static async IAsyncEnumerable<T> ReadAllAsync<T>(this FeedIterator<T> feedIterator, Func<T, Task<T>>? processor = null, [EnumeratorCancellation] CancellationToken cancellationToken = default)
+    public static async IAsyncEnumerable<T> ReadAllAsync<T>(this FeedIterator<T> feedIterator, Func<T, Task<T>>? processor = null, [EnumeratorCancellation] CancellationToken cancellationToken = default)
     {
         if (feedIterator is null)
             throw new ArgumentNullException(nameof(feedIterator));

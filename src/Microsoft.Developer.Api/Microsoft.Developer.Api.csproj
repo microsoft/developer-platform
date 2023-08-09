@@ -19,9 +19,9 @@
   <ItemGroup>
     <ProjectReference Include="..\Microsoft.Developer.Azure\Microsoft.Developer.Azure.csproj" />
     <ProjectReference Include="..\Microsoft.Developer.Configuration\Microsoft.Developer.Configuration.csproj" />
+    <ProjectReference Include="..\Microsoft.Developer.Data\Microsoft.Developer.Data.csproj" />
     <ProjectReference Include="..\Microsoft.Developer.Entities\Microsoft.Developer.Entities.csproj" />
     <ProjectReference Include="..\Microsoft.Developer.Entities.Serialization\Microsoft.Developer.Entities.Serialization.csproj" />
-    <ProjectReference Include="..\Microsoft.Developer.Data\Microsoft.Developer.Data.csproj" />
     <ProjectReference Include="..\Microsoft.Developer.MSGraph\Microsoft.Developer.MSGraph.csproj" />
   </ItemGroup>
 
