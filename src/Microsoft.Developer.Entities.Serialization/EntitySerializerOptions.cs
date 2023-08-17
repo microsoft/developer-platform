@@ -5,6 +5,13 @@
 
 namespace Microsoft.Developer.Entities.Serialization;
 
+public enum EntitySerializer
+{
+    Default,
+    API,
+    Database
+}
+
 public static class EntitySerializerOptions
 {
     public static readonly JsonSerializerOptions Default = new()
@@ -27,6 +34,12 @@ public static class EntitySerializerOptions
         Converters = {
             new JsonStringEnumConverter()
         },
+        TypeInfoResolver = new EntityTypeResolver
+        {
+            Modifiers = {
+                SlugifyModifier.Modify
+            }
+        },
         // AllowTrailingCommas =
         WriteIndented = true
     };
@@ -37,8 +50,8 @@ public static class EntitySerializerOptions
         TypeInfoResolver = new EntityTypeResolver
         {
             Modifiers = {
-                ApiIgnoreModifier.Modify,
-                SlugifyModifier.Modify
+                SlugifyModifier.Modify,
+                ApiIgnoreModifier.Modify
             }
         }
     };
@@ -49,8 +62,8 @@ public static class EntitySerializerOptions
         TypeInfoResolver = new EntityTypeResolver
         {
             Modifiers = {
-                DatabaseIgnoreModifier.Modify,
-                SlugifyModifier.Modify
+                SlugifyModifier.Modify,
+                DatabaseIgnoreModifier.Modify
             }
         }
     };
@@ -65,25 +78,33 @@ public static class EntitySerializerOptions
         return options;
     }
 
-    public static void AddEntitySerialization(this JsonSerializerOptions options)
+    public static void AddEntitySerialization(this JsonSerializerOptions options, EntitySerializer serializer = EntitySerializer.API)
     {
-        options.TypeInfoResolver = API.TypeInfoResolver;
-        options.ReferenceHandler = API.ReferenceHandler;
-        options.ReadCommentHandling = API.ReadCommentHandling;
-        options.PropertyNamingPolicy = API.PropertyNamingPolicy;
-        options.PropertyNameCaseInsensitive = API.PropertyNameCaseInsensitive;
-        options.MaxDepth = API.MaxDepth;
-        options.IncludeFields = API.IncludeFields;
-        options.IgnoreReadOnlyProperties = API.IgnoreReadOnlyProperties;
-        options.IgnoreReadOnlyFields = API.IgnoreReadOnlyFields;
-        options.Encoder = API.Encoder;
-        options.UnknownTypeHandling = API.UnknownTypeHandling;
-        options.DictionaryKeyPolicy = API.DictionaryKeyPolicy;
-        options.DefaultIgnoreCondition = API.DefaultIgnoreCondition;
-        options.DefaultBufferSize = API.DefaultBufferSize;
-        foreach (var converter in API.Converters)
+        var opts = serializer switch
+        {
+            EntitySerializer.Default => Default,
+            EntitySerializer.API => API,
+            EntitySerializer.Database => Database,
+            _ => throw new ArgumentOutOfRangeException(nameof(serializer), serializer, $"Not exected serializer value: {serializer}.")
+        };
+
+        options.TypeInfoResolver = opts.TypeInfoResolver;
+        options.ReferenceHandler = opts.ReferenceHandler;
+        options.ReadCommentHandling = opts.ReadCommentHandling;
+        options.PropertyNamingPolicy = opts.PropertyNamingPolicy;
+        options.PropertyNameCaseInsensitive = opts.PropertyNameCaseInsensitive;
+        options.MaxDepth = opts.MaxDepth;
+        options.IncludeFields = opts.IncludeFields;
+        options.IgnoreReadOnlyProperties = opts.IgnoreReadOnlyProperties;
+        options.IgnoreReadOnlyFields = opts.IgnoreReadOnlyFields;
+        options.Encoder = opts.Encoder;
+        options.UnknownTypeHandling = opts.UnknownTypeHandling;
+        options.DictionaryKeyPolicy = opts.DictionaryKeyPolicy;
+        options.DefaultIgnoreCondition = opts.DefaultIgnoreCondition;
+        options.DefaultBufferSize = opts.DefaultBufferSize;
+        foreach (var converter in opts.Converters)
             options.Converters.Add(converter);
-        options.AllowTrailingCommas = API.AllowTrailingCommas;
-        options.WriteIndented = API.WriteIndented;
+        options.AllowTrailingCommas = opts.AllowTrailingCommas;
+        options.WriteIndented = opts.WriteIndented;
     }
 }

@@ -17,10 +17,7 @@ public static class ServiceCollectionExtensions
     public static IServiceCollection AddMsDeveloperData(this IServiceCollection services)
     {
         services
-            .AddSingleton<ICosmosDbService, CosmosDbService>()
-            .AddSingleton<IUserRepository, CosmosUserRepository>()
-            .AddSingleton<IProjectRepository, CosmosProjectRepository>()
-            .AddSingleton<IEntitiesRepository, CosmosEntitiesRepository>();
+            .AddSingleton<ICosmosDbService, CosmosDbService>();
 
         return services;
     }

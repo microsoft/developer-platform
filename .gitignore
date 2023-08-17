@@ -413,3 +413,5 @@ openapi/openapi.yaml
 sdks/**
 
 schemas/**
+
+*.json.zip

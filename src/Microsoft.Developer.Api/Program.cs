@@ -10,6 +10,7 @@ using Microsoft.Developer.Azure;
 using Microsoft.Developer.Configuration;
 using Microsoft.Developer.Configuration.Options;
 using Microsoft.Developer.Data;
+using Microsoft.Developer.Data.CosmosDb;
 using Microsoft.Developer.Entities.Serialization;
 using Microsoft.Developer.MSGraph;
 
@@ -30,9 +31,15 @@ builder.Services
 
 builder.Services
     .AddMsDeveloperData()
+    .AddSingleton<IUserRepository, CosmosUserRepository>()
+    .AddSingleton<IProjectRepository, CosmosProjectRepository>()
+    .AddSingleton<IEntitiesRepository, CosmosEntitiesRepository>();
+
+builder.Services
     .AddMsDeveloperAzure(includeUserServices: true)
     .AddMsDeveloperCache(builder.Configuration)
     .AddMsDeveloperMsGraph();
+
 
 builder.Services
     .AddSingleton<UserService>();
