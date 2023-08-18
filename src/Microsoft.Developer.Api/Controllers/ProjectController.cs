@@ -15,6 +15,10 @@ namespace Microsoft.Developer.Api.Controllers;
 public class ProjectController : MsDeveloperController
 {
 
+    // This is only meant to be a stub for testing foundational concepts like database connections,
+    // auth, etc. It is not the decided upon api, and and likely removed
+
+
     private readonly ILogger<ProjectController> logger;
     private readonly IProjectRepository projectRepo;
 

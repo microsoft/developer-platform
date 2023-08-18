@@ -15,6 +15,9 @@ namespace Microsoft.Developer.Api.Controllers;
 [ApiController]
 public class UserController : MsDeveloperController
 {
+    // This is only meant to be a stub for testing foundational concepts like database connections,
+    // auth, etc. It is not the decided upon api, and and likely removed
+
     private readonly ILogger<UserController> logger;
     private readonly IUserRepository userRepo;
 
