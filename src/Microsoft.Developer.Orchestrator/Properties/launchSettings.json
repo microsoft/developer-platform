@@ -1,0 +1,9 @@
+{
+  "profiles": {
+    "Microsoft.Developer.Orchestrator": {
+      "commandName": "Project",
+      "commandLineArgs": "--port 7137",
+      "launchBrowser": false
+    }
+  }
+}

@@ -21,6 +21,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Microsoft.Developer.MSGraph
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Microsoft.Developer.Entities.Serialization", "Microsoft.Developer.Entities.Serialization\Microsoft.Developer.Entities.Serialization.csproj", "{D7197947-37E7-4FBF-9640-6C6037F139CA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Microsoft.Developer.Orchestrator", "Microsoft.Developer.Orchestrator\Microsoft.Developer.Orchestrator.csproj", "{421D368F-ACCC-4A9C-830F-2CBBE042BD0C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -63,6 +65,10 @@ Global
 		{D7197947-37E7-4FBF-9640-6C6037F139CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D7197947-37E7-4FBF-9640-6C6037F139CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D7197947-37E7-4FBF-9640-6C6037F139CA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{421D368F-ACCC-4A9C-830F-2CBBE042BD0C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{421D368F-ACCC-4A9C-830F-2CBBE042BD0C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{421D368F-ACCC-4A9C-830F-2CBBE042BD0C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{421D368F-ACCC-4A9C-830F-2CBBE042BD0C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
