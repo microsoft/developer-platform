@@ -1,0 +1,55 @@
+<Project>
+
+  <PropertyGroup>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <LangVersion>preview</LangVersion>
+    <UseArtifactsOutput>true</UseArtifactsOutput>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <WarningsAsErrors>true</WarningsAsErrors>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Using Include="System.Text.Json" />
+    <Using Include="Microsoft.Developer" />
+    <Using Include="Microsoft.Extensions.Logging" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <AccelerateBuildsInVisualStudio>true</AccelerateBuildsInVisualStudio>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <InformationalVersion>$(GitVersion_InformationalVersion)</InformationalVersion>
+    <FileVersion>$(GitVersion_MajorMinorPatch)</FileVersion>
+    <AssemblyVersion>$(GitVersion_AssemblySemVer)</AssemblyVersion>
+    <Version>$(GitVersion_NuGetVersionV2)</Version>
+    <Version Condition=" '$(Version)' == '' ">0.0.1</Version>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <ContainerImageTags>$(Version);latest</ContainerImageTags>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(IMAGE_REGISTRY)' != '' ">
+    <ContainerRegistry>$(IMAGE_REGISTRY)</ContainerRegistry>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <ContainerVendor>Microsoft</ContainerVendor>
+    <ContainerLicenseExpression>MIT</ContainerLicenseExpression>
+    <ContainerInformationUrl>https://github.com/microsoft/developer-platform</ContainerInformationUrl>
+    <ContainerGenerateLabelsImageCreated>true</ContainerGenerateLabelsImageCreated>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ContainerEnvironmentVariable Include="DEVELOPER_API_IMAGE_VERSION" Value="$(Version)" />
+  </ItemGroup>
+
+</Project>

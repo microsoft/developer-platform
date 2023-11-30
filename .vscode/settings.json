@@ -24,4 +24,8 @@
     },
     "dotnet.defaultSolution": "src/Microsoft.Developer.sln",
     "omnisharp.projectFilesExcludePattern": "**/node_modules/**,**/.git/**,**/bower_components/**,**/.local/**",
+    "azureFunctions.deploySubpath": "src/Microsoft.Developer.Orchestrator/bin/Release/net7.0/publish",
+    "debug.internalConsoleOptions": "neverOpen",
+    "azureFunctions.projectSubpath": "src/Microsoft.Developer.Orchestrator",
+    "azureFunctions.preDeployTask": "publish (functions)",
 }

@@ -1,0 +1,28 @@
+{
+    "version": "2.0.0",
+    "type": "shell",
+    "options": {
+        "cwd": "${workspaceFolder}"
+    },
+    "problemMatcher": [],
+    "presentation": {
+        "showReuseMessage": false,
+    },
+    "args": [],
+    "inputs": [],
+    "tasks": [
+        {
+            "label": "build openapi",
+            "type": "shell",
+            "command": "dotnet",
+            "args": [
+                "build",
+                "-t:OpenApi"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}/Microsoft.Developer.Api"
+            },
+            "problemMatcher": "$msCompile",
+        }
+    ]
+}

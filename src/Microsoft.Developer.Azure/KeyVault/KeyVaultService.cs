@@ -1,11 +1,11 @@
-/**
- *  Copyright (c) Microsoft Corporation.
- *  Licensed under the MIT License.
- */
+﻿// Copyright (c) Microsoft Corporation.
+// Licensed under the MIT License.
 
 using Azure.Security.KeyVault.Certificates;
 using Azure.Security.KeyVault.Keys;
 using Azure.Security.KeyVault.Secrets;
+using Microsoft.Developer.Configuration.Options;
+using Microsoft.Extensions.Options;
 
 namespace Microsoft.Developer.Azure.KeyVault;
 
@@ -22,19 +22,24 @@ public class KeyVaultService : IKeyVaultService
     public KeyClient Keys { get; private set; }
     public SecretClient Secrets { get; private set; }
 
-    public KeyVaultService(IAppArmService arm, IOptions<KeyVaultOptions> options)
+    public KeyVaultService(IArmService arm, IOptions<KeyVaultOptions> options)
     {
-        if (arm is null)
-            throw new ArgumentNullException(nameof(arm));
+        ArgumentNullException.ThrowIfNull(arm);
 
         if (options?.Value is null)
+        {
             throw new ArgumentNullException(nameof(options));
+        }
 
         if (string.IsNullOrEmpty(options?.Value.Endpoint))
+        {
             throw new ArgumentException("Endpoint cannot be null or empty.", nameof(options));
+        }
 
         if (!Uri.IsWellFormedUriString(options?.Value.Endpoint, UriKind.Absolute))
+        {
             throw new ArgumentException("Endpoint is not a valid URI.", nameof(options));
+        }
 
         var uri = new Uri(options!.Value.Endpoint, UriKind.Absolute);
         var token = arm.GetTokenCredential();

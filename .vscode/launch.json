@@ -6,6 +6,13 @@
             "request": "launch",
             "projectPath": "${workspaceFolder}/src/Microsoft.Developer.Api/Microsoft.Developer.Api.csproj",
             "internalConsoleOptions": "openOnSessionStart"
+        },
+        {
+            "name": "Attach to .NET Functions",
+            "type": "coreclr",
+            "request": "attach",
+            "processId": "${command:azureFunctions.pickProcess}"
         }
-    ]
+    ],
+    "version": "0.2.0"
 }

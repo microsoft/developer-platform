@@ -1,28 +1,56 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>net7.0</TargetFramework>
-    <Nullable>enable</Nullable>
-    <ImplicitUsings>enable</ImplicitUsings>
+    <TargetFramework>net8.0</TargetFramework>
+    <UserSecretsId>b4d0ecf0-a6ec-491f-b55f-477034a500a7</UserSecretsId>
+  </PropertyGroup>
+
+ <PropertyGroup>
+    <ContainerVersion>$(Version)</ContainerVersion>
+    <ContainerTitle>Microsoft Developer Platform API</ContainerTitle>
+    <ContainerDescription>The Microsoft Developer Platform API.</ContainerDescription>
+    <ContainerDocumentationUrl>https://github.com/microsoft/developer-platform/tree/main/src/Microsoft.Developer.Api</ContainerDocumentationUrl>
+    <ContainerRepository>developer-platform/api</ContainerRepository>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="7.0.9" />
-    <PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="7.0.9" />
-    <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.9" />
-    <PackageReference Include="Microsoft.Identity.Web" Version="2.11.1" />
-    <PackageReference Include="Microsoft.Identity.Web.Azure" Version="2.11.1" />
-    <PackageReference Include="Microsoft.Identity.Web.DownstreamApi" Version="2.11.1" />
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
+    <ContainerEnvironmentVariable Include="ASPNETCORE_HTTP_PORTS" Value="8080" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" />
+    <PackageReference Include="Microsoft.AspNetCore.OpenApi" />
+    <PackageReference Include="Microsoft.Azure.DurableTask.Emulator" />
+    <PackageReference Include="Microsoft.Identity.Web" />
+    <PackageReference Include="Microsoft.Identity.Web.Azure" />
+    <PackageReference Include="Microsoft.Identity.Web.DownstreamApi" />
+    <PackageReference Include="Microsoft.IO.RecyclableMemoryStream" />
+    <PackageReference Include="Swashbuckle.AspNetCore" />
+    <PackageReference Include="Microsoft.Azure.DurableTask.AzureStorage" />
+    <PackageReference Include="Yaml2JsonNode" />
+    <PackageReference Include="Yarp.ReverseProxy" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Microsoft.Developer.Abstractions\Microsoft.Developer.Abstractions.csproj" />
     <ProjectReference Include="..\Microsoft.Developer.Azure\Microsoft.Developer.Azure.csproj" />
-    <ProjectReference Include="..\Microsoft.Developer.Configuration\Microsoft.Developer.Configuration.csproj" />
-    <ProjectReference Include="..\Microsoft.Developer.Data\Microsoft.Developer.Data.csproj" />
-    <ProjectReference Include="..\Microsoft.Developer.Entities\Microsoft.Developer.Entities.csproj" />
-    <ProjectReference Include="..\Microsoft.Developer.Entities.Serialization\Microsoft.Developer.Entities.Serialization.csproj" />
+    <ProjectReference Include="..\Microsoft.Developer.Data.Cosmos\Microsoft.Developer.Data.Cosmos.csproj" />
+    <ProjectReference Include="..\Microsoft.Developer.DurableTasks\Microsoft.Developer.DurableTasks.csproj" />
+    <ProjectReference Include="..\Microsoft.Developer.Hosting.AspNetCore\Microsoft.Developer.Hosting.AspNetCore.csproj" />
     <ProjectReference Include="..\Microsoft.Developer.MSGraph\Microsoft.Developer.MSGraph.csproj" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Using Include="Microsoft.Developer.Entities" />
+  </ItemGroup>
+
+  <!-- This is a hack to prevent dotnet swagger from choking -->
+  <!-- https://github.com/domaindrivendev/Swashbuckle.AspNetCore/issues/2355#issuecomment-1106607423 -->
+  <Target Name="OpenApi" DependsOnTargets="Build">
+    <Message Text="generating openapi" Importance="high" />
+    <Exec Command="dotnet tool restore" />
+    <Exec EnvironmentVariables="DOTNET_ENVIRONMENT=DesignTime" Command="dotnet swagger tofile --yaml --output $(MSBuildThisFileDirectory)/../../openapi/openapi.yaml $(OutputPath)$(AssemblyName).dll v1" />
+  </Target>
 
 </Project>

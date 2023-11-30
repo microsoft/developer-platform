@@ -1,16 +1,20 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net7.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
+    <TargetFramework>net8.0</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="7.0.9" />
-    <PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="7.0.9" />
+    <ProjectReference Include="..\Microsoft.Developer.Abstractions\Microsoft.Developer.Abstractions.csproj" />
+    <ProjectReference Include="..\Microsoft.Developer.Serialization.Json\Microsoft.Developer.Serialization.Json.csproj" />
+  </ItemGroup>
 
-    <PackageReference Include="Microsoft.Identity.Web" Version="2.11.1" />
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" />
+    <PackageReference Include="Microsoft.Identity.Web" />
+    <PackageReference Include="YamlDotNet" />
+    <PackageReference Include="Yaml2JsonNode" />
   </ItemGroup>
 
 </Project>

@@ -1,7 +1,5 @@
-/**
- *  Copyright (c) Microsoft Corporation.
- *  Licensed under the MIT License.
- */
+﻿// Copyright (c) Microsoft Corporation.
+// Licensed under the MIT License.
 
 using System.Data;
 using System.Text;
@@ -15,14 +13,13 @@ namespace Microsoft.Developer.MSGraph;
 
 public class GraphService : IGraphService
 {
+    private static readonly string[] userSelect = ["id", "userPrincipalName", "displayName", "givenName", "surname", "mail", "otherMails", "identities", "deletedDateTime", "companyName", "jobTitle", "preferredLanguage", "userType", "department"];
+    private static readonly string[] groupSelect = ["id", "displayName", "mail", "deletedDateTime"];
+    private static readonly string[] memberSelect = ["id", "displayName", "mail", "deletedDateTime"];
+    private static readonly string[] servicePrincipalSelect = ["id", "displayName", "appId", "appDisplayName", "alternativeNames", "deletedDateTime", "servicePrincipalNames", "servicePrincipalType", "replyUrls"];
+    private static readonly string[] applicationSelect = ["id", "displayName", "appId", "deletedDateTime", "identifierUris", "uniqueName", "passwordCredentials"];
 
-    private readonly static string[] userSelect = new string[] { "id", "userPrincipalName", "displayName", "givenName", "surname", "mail", "otherMails", "identities", "deletedDateTime", "companyName", "jobTitle", "preferredLanguage", "userType", "department" };
-    private readonly static string[] groupSelect = new string[] { "id", "displayName", "mail", "deletedDateTime" };
-    private readonly static string[] memberSelect = new string[] { "id", "displayName", "mail", "deletedDateTime" };
-    private readonly static string[] servicePrincipalSelect = new string[] { "id", "displayName", "appId", "appDisplayName", "alternativeNames", "deletedDateTime", "servicePrincipalNames", "servicePrincipalType", "replyUrls" };
-    private readonly static string[] applicationSelect = new string[] { "id", "displayName", "appId", "deletedDateTime", "identifierUris", "uniqueName", "passwordCredentials" };
-
-    private const string SECRET_DESCRIPTION = "Managed by Microsoft Developer Platform";
+    private const string SecretDescription = "Managed by Microsoft Developer Platform";
     private readonly GraphServiceClient graphClient;
 
     // public GraphService(ITeamCloudCredentialOptions teamCloudCredentialOptions = null)
@@ -48,14 +45,18 @@ public class GraphService : IGraphService
             .ConfigureAwait(false);
 
         if (!string.IsNullOrEmpty(user?.DisplayName))
+        {
             return user.DisplayName;
+        }
 
         // otherwise try to find a service principal
         var principal = await GetServicePrincipalInternalAsync(graphClient, identifier)
             .ConfigureAwait(false);
 
         if (!string.IsNullOrEmpty(principal?.DisplayName))
+        {
             return principal.DisplayName;
+        }
 
         return null;
     }
@@ -63,7 +64,9 @@ public class GraphService : IGraphService
     public async Task<string?> GetGroupIdAsync(string identifier)
     {
         if (!identifier.IsGuid())
+        {
             return null;
+        }
 
         try
         {
@@ -83,7 +86,9 @@ public class GraphService : IGraphService
     public async IAsyncEnumerable<string> GetGroupMembersAsync(string identifier, bool resolveAllGroups = false)
     {
         if (identifier is null)
+        {
             throw new ArgumentNullException(nameof(identifier));
+        }
 
         var groupId = await GetGroupIdAsync(identifier)
             .ConfigureAwait(false);
@@ -94,9 +99,8 @@ public class GraphService : IGraphService
 
             var memberList = new List<DirectoryObject>();
 
-            if (resolveAllGroups)
-            {
-                collectionResponse = await graphClient
+            collectionResponse = resolveAllGroups
+                ? await graphClient
                     .Groups[groupId]
                     .TransitiveMembers
                     .GetAsync(config =>
@@ -104,11 +108,8 @@ public class GraphService : IGraphService
                         config.Headers.Add("ConsistencyLevel", "eventual");
                         config.QueryParameters.Select = memberSelect;
                     })
-                    .ConfigureAwait(false);
-            }
-            else
-            {
-                collectionResponse = await graphClient
+                    .ConfigureAwait(false)
+                : await graphClient
                     .Groups[groupId]
                     .Members
                     .GetAsync(config =>
@@ -117,10 +118,11 @@ public class GraphService : IGraphService
                         config.QueryParameters.Select = memberSelect;
                     })
                     .ConfigureAwait(false);
-            }
 
             if (collectionResponse is null)
+            {
                 yield break;
+            }
 
             var pageIterator = PageIterator<DirectoryObject, DirectoryObjectCollectionResponse>
                 .CreatePageIterator(graphClient, collectionResponse, (member) =>
@@ -130,9 +132,11 @@ public class GraphService : IGraphService
                 });
 
             await pageIterator.IterateAsync();
-
-            foreach (var memberId in memberList.Where(m => !m.DeletedDateTime.HasValue && !string.IsNullOrEmpty(m.Id)).Select(m => m.Id))
+            // foreach (var memberId in memberList.Where(m => !m.DeletedDateTime.HasValue && !string.IsNullOrEmpty(m.Id)).Select(m => m.Id))
+            foreach (var memberId in memberList.Where(m => !string.IsNullOrEmpty(m.Id)).Select(m => m.Id))
+            {
                 yield return memberId!;
+            }
         }
     }
 
@@ -165,14 +169,18 @@ public class GraphService : IGraphService
             .ConfigureAwait(false);
 
         if (!string.IsNullOrEmpty(user?.Id))
+        {
             return user.Id;
+        }
 
         // otherwise try to find a service principal
         var principal = await GetServicePrincipalInternalAsync(graphClient, identifier)
             .ConfigureAwait(false);
 
         if (!string.IsNullOrEmpty(principal?.Id))
+        {
             return principal.Id;
+        }
 
         // not a user name or id, and not a service principal name, appId, or id
         return null;
@@ -187,7 +195,9 @@ public class GraphService : IGraphService
     public async Task<AzureServicePrincipal?> CreateServicePrincipalAsync(string name)
     {
         if (name is null)
+        {
             throw new ArgumentNullException(nameof(name));
+        }
 
         try
         {
@@ -197,21 +207,23 @@ public class GraphService : IGraphService
             {
                 DisplayName = name,
                 SignInAudience = "AzureADMyOrg",
-                RequiredResourceAccess = new List<RequiredResourceAccess> {
-                    new RequiredResourceAccess {
+                RequiredResourceAccess = [
+                    new RequiredResourceAccess
+                    {
                         ResourceAppId = "00000003-0000-0000-c000-000000000000",
-                        ResourceAccess = new List<ResourceAccess> {
-                            new ResourceAccess {
+                        ResourceAccess = [
+                            new ResourceAccess
+                            {
                                 Id = Guid.Parse("e1fe6dd8-ba31-4d61-89e7-88639da4683d"), // User.Read
                                 Type = "Scope"
                             }
-                        }
+                        ]
                     }
-                },
-                IdentifierUris = new List<string>
-                {
+                ],
+                IdentifierUris =
+                [
                     $"api://{name}"
-                }
+                ]
             };
 
             application = await graphClient
@@ -220,7 +232,9 @@ public class GraphService : IGraphService
                 .ConfigureAwait(false);
 
             if (application is null)
+            {
                 return null;
+            }
 
             var servicePrincipal = new ServicePrincipal
             {
@@ -232,7 +246,9 @@ public class GraphService : IGraphService
                 .ConfigureAwait(false);
 
             if (servicePrincipal is null || string.IsNullOrEmpty(servicePrincipal.Id) || string.IsNullOrEmpty(servicePrincipal.AppId))
+            {
                 return null;
+            }
 
             var expiresOn = DateTimeOffset.UtcNow.AddYears(1);
 
@@ -241,7 +257,7 @@ public class GraphService : IGraphService
                 StartDateTime = DateTimeOffset.UtcNow,
                 EndDateTime = expiresOn,
                 KeyId = Guid.NewGuid(),
-                CustomKeyIdentifier = Encoding.UTF8.GetBytes(SECRET_DESCRIPTION)
+                CustomKeyIdentifier = Encoding.UTF8.GetBytes(SecretDescription)
             };
 
             passwordCredential = await graphClient
@@ -271,7 +287,9 @@ public class GraphService : IGraphService
     public async Task DeleteServicePrincipalAsync(string identifier)
     {
         if (identifier is null)
+        {
             throw new ArgumentNullException(nameof(identifier));
+        }
 
         identifier = SanitizeServicePrincipalName(identifier);
 
@@ -296,7 +314,9 @@ public class GraphService : IGraphService
     public async Task<AzureServicePrincipal?> GetServicePrincipalAsync(string identifier)
     {
         if (identifier is null)
+        {
             throw new ArgumentNullException(nameof(identifier));
+        }
 
         identifier = SanitizeServicePrincipalName(identifier);
 
@@ -304,13 +324,17 @@ public class GraphService : IGraphService
             .ConfigureAwait(false);
 
         if (servicePrincipal is null || string.IsNullOrEmpty(servicePrincipal.AppId) || string.IsNullOrEmpty(servicePrincipal.Id))
+        {
             return null;
+        }
 
         var application = await GetApplicationInternalAsync(graphClient, servicePrincipal.AppId)
             .ConfigureAwait(false);
 
         if (application is null || application.PasswordCredentials is null || !application.PasswordCredentials.Any())
+        {
             return null;
+        }
 
         var customKeyIdentifier = Guid.Parse(servicePrincipal.Id).ToByteArray();
 
@@ -332,7 +356,9 @@ public class GraphService : IGraphService
     public async Task<Dictionary<string, Dictionary<Guid, AccessType>>> GetResourcePermissionsAsync(string identifier)
     {
         if (identifier is null)
+        {
             throw new ArgumentNullException(nameof(identifier));
+        }
 
         identifier = SanitizeServicePrincipalName(identifier);
 
@@ -340,10 +366,12 @@ public class GraphService : IGraphService
             .ConfigureAwait(false) ?? throw new ArgumentException($"Could not find application by identifier '{identifier}'", nameof(identifier));
 
         if (application.RequiredResourceAccess is null)
-            return new Dictionary<string, Dictionary<Guid, AccessType>>();
+        {
+            return [];
+        }
 
         return application.RequiredResourceAccess
-            .Where(rra => rra.ResourceAccess?.Any() ?? false && !string.IsNullOrEmpty(rra.ResourceAppId))
+            .Where(rra => (rra.ResourceAccess?.Any() ?? false) && !string.IsNullOrEmpty(rra.ResourceAppId))
             .GroupBy(rra => rra.ResourceAppId!)
             .ToDictionary(grp => grp.Key,
                           grp => grp.SelectMany(item => item.ResourceAccess!)
@@ -354,7 +382,9 @@ public class GraphService : IGraphService
     public async Task<Dictionary<string, Dictionary<Guid, AccessType>>> SetResourcePermissionsAsync(string identifier, Dictionary<string, Dictionary<Guid, AccessType>> resourcePermissions)
     {
         if (identifier is null)
+        {
             throw new ArgumentNullException(nameof(identifier));
+        }
 
         identifier = SanitizeServicePrincipalName(identifier);
 
@@ -390,20 +420,24 @@ public class GraphService : IGraphService
     public async Task<List<string>> GetServicePrincipalRedirectUrlsAsync(string identifier)
     {
         if (identifier is null)
+        {
             throw new ArgumentNullException(nameof(identifier));
+        }
 
         identifier = SanitizeServicePrincipalName(identifier);
 
         var servicePrincipal = await GetServicePrincipalInternalAsync(graphClient, identifier)
             .ConfigureAwait(false);
 
-        return servicePrincipal?.ReplyUrls ?? new List<string>();
+        return servicePrincipal?.ReplyUrls ?? [];
     }
 
     public async Task<AzureServicePrincipal?> RefreshServicePrincipalAsync(string identifier)
     {
         if (identifier is null)
+        {
             throw new ArgumentNullException(nameof(identifier));
+        }
 
         identifier = SanitizeServicePrincipalName(identifier);
 
@@ -411,19 +445,23 @@ public class GraphService : IGraphService
             .ConfigureAwait(false);
 
         if (servicePrincipal is null || string.IsNullOrEmpty(servicePrincipal.Id) || string.IsNullOrEmpty(servicePrincipal.AppId))
+        {
             return null;
+        }
 
         var application = await GetApplicationInternalAsync(graphClient, servicePrincipal.AppId)
             .ConfigureAwait(false);
 
         if (application is null || application.PasswordCredentials is null || !application.PasswordCredentials.Any())
+        {
             return null;
+        }
 
         var expiresOn = DateTimeOffset.UtcNow.AddYears(1);
 
         var passwordCredential = application
             .PasswordCredentials
-            .FirstOrDefault(cred => Encoding.UTF8.GetBytes(SECRET_DESCRIPTION).SequenceEqual(cred.CustomKeyIdentifier ?? Enumerable.Empty<byte>()));
+            .FirstOrDefault(cred => Encoding.UTF8.GetBytes(SecretDescription).SequenceEqual(cred.CustomKeyIdentifier ?? Enumerable.Empty<byte>()));
 
         if (passwordCredential is not null && passwordCredential.KeyId.HasValue)
         {
@@ -439,7 +477,7 @@ public class GraphService : IGraphService
             StartDateTime = DateTimeOffset.UtcNow,
             EndDateTime = expiresOn,
             KeyId = Guid.NewGuid(),
-            CustomKeyIdentifier = Encoding.UTF8.GetBytes(SECRET_DESCRIPTION)
+            CustomKeyIdentifier = Encoding.UTF8.GetBytes(SecretDescription)
         };
 
         passwordCredential = await graphClient
@@ -464,7 +502,9 @@ public class GraphService : IGraphService
     public async Task<IEnumerable<string>> SetServicePrincipalRedirectUrlsAsync(string identifier, params string[] redirectUrls)
     {
         if (identifier is null)
+        {
             throw new ArgumentNullException(nameof(identifier));
+        }
 
         identifier = SanitizeServicePrincipalName(identifier);
 
@@ -472,7 +512,9 @@ public class GraphService : IGraphService
             .ConfigureAwait(false);
 
         if (application is null)
+        {
             return new List<string>();
+        }
 
         redirectUrls = redirectUrls.Distinct(StringComparer.OrdinalIgnoreCase).ToArray();
 
@@ -480,7 +522,7 @@ public class GraphService : IGraphService
         {
             Web = new WebApplication()
             {
-                RedirectUris = redirectUrls.ToList()
+                RedirectUris = [.. redirectUrls]
             }
         };
 
@@ -496,7 +538,7 @@ public class GraphService : IGraphService
         {
             var servicePrincipalPath = new ServicePrincipal()
             {
-                ReplyUrls = redirectUrls.ToList()
+                ReplyUrls = [.. redirectUrls]
             };
 
             await graphClient
@@ -520,7 +562,9 @@ public class GraphService : IGraphService
             var domains = new List<Domain>();
 
             if (collectionResponse is null)
+            {
                 return domains;
+            }
 
             var pageIterator = PageIterator<Domain, DomainCollectionResponse>
                 .CreatePageIterator(client, collectionResponse, (domain) =>
@@ -537,17 +581,21 @@ public class GraphService : IGraphService
         // catch (ServiceException exc)
         catch (ServiceException)
         {
-            return new List<Domain>();
+            return [];
         }
     }
 
     private static async Task<User?> GetUserInternalAsync(GraphServiceClient client, string identifier)
     {
         if (identifier.StartsWithHttp())
+        {
             return null;
+        }
 
         if (!(identifier.IsGuid() || identifier.IsEMail()))
+        {
             return null;
+        }
 
         if (identifier.IsEMail())
         {
@@ -584,7 +632,9 @@ public class GraphService : IGraphService
         var filter = $"servicePrincipalNames/any(p:p eq '{identifier}') or servicePrincipalNames/any(p:p eq 'api://{identifier}')";
 
         if (identifier.IsGuid())
+        {
             filter += $" or id eq '{identifier}'";
+        }
 
         try
         {
@@ -598,7 +648,9 @@ public class GraphService : IGraphService
                 .ConfigureAwait(false);
 
             if (collectionResponse is null)
+            {
                 return null;
+            }
 
             var principal = collectionResponse.Value?.FirstOrDefault();
 
@@ -615,10 +667,12 @@ public class GraphService : IGraphService
             }
 
             if (principal is not null)
+            {
                 principal = await client
                     .ServicePrincipals[principal.Id]
                     .GetAsync()
                     .ConfigureAwait(false);
+            }
 
             return principal;
         }
@@ -633,7 +687,9 @@ public class GraphService : IGraphService
         var filter = $"identifierUris/any(p:p eq 'http://{identifier}') or identifierUris/any(p:p eq 'https://{identifier}') or identifierUris/any(p:p eq 'api://{identifier}')";
 
         if (identifier.IsGuid())
+        {
             filter += $" or id eq '{identifier}' or appId eq '{identifier}'";
+        }
 
         try
         {
@@ -647,7 +703,9 @@ public class GraphService : IGraphService
                 .ConfigureAwait(false);
 
             if (collectionResponse is null)
+            {
                 return null;
+            }
 
             var application = collectionResponse.Value?.FirstOrDefault();
 
@@ -664,10 +722,12 @@ public class GraphService : IGraphService
             }
 
             if (application is not null)
+            {
                 application = await client
                     .Applications[application.Id]
                     .GetAsync()
                     .ConfigureAwait(false);
+            }
 
             return application;
         }
@@ -681,10 +741,9 @@ public class GraphService : IGraphService
     {
         const string ServicePrincipalNamePrefix = "MSDeveloper/";
 
-        if (name.StartsWith(ServicePrincipalNamePrefix, StringComparison.OrdinalIgnoreCase))
-            name = ServicePrincipalNamePrefix + name[ServicePrincipalNamePrefix.Length..];
-        else
-            name = ServicePrincipalNamePrefix + name;
+        name = name.StartsWith(ServicePrincipalNamePrefix, StringComparison.OrdinalIgnoreCase)
+            ? ServicePrincipalNamePrefix + name[ServicePrincipalNamePrefix.Length..]
+            : ServicePrincipalNamePrefix + name;
 
         return name.Replace(" ", string.Empty, StringComparison.OrdinalIgnoreCase);
     }

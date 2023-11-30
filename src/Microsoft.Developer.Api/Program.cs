@@ -1,72 +1,96 @@
-/**
- *  Copyright (c) Microsoft Corporation.
- *  Licensed under the MIT License.
- */
+﻿// Copyright (c) Microsoft Corporation.
+// Licensed under the MIT License.
 
+using DurableTask.AzureStorage;
+using DurableTask.DependencyInjection;
+using DurableTask.Emulator;
+using DurableTask.Hosting;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Developer.Api;
-using Microsoft.Developer.Api.Auth;
-using Microsoft.Developer.Api.Services;
 using Microsoft.Developer.Azure;
-using Microsoft.Developer.Configuration;
-using Microsoft.Developer.Configuration.Options;
 using Microsoft.Developer.Data;
-using Microsoft.Developer.Data.CosmosDb;
 using Microsoft.Developer.Entities.Serialization;
 using Microsoft.Developer.MSGraph;
+using Microsoft.Extensions.Options;
+using Microsoft.Identity.Web;
+using Microsoft.IO;
 
 var builder = WebApplication.CreateBuilder(args);
 
 const string AllowLocalhost = nameof(AllowLocalhost);
 
-builder.Services
-    .AddMsDeveloperConfiguration(builder.Configuration)
-    .AddMsDeveloperOptions(builder.Configuration);
+builder.Configuration
+    .AddMsDeveloperConfiguration(builder.Environment);
 
-builder.Services
-    .ConfigureHttpJsonOptions(o => o.SerializerOptions.AddEntitySerialization());
-
+builder.Services.AddHttpForwarder();
 builder.Services
     .AddMemoryCache()
     .AddHttpContextAccessor();
 
-builder.Services
-    .AddMsDeveloperData()
-    .AddSingleton<IUserRepository, CosmosUserRepository>()
-    .AddSingleton<IProjectRepository, CosmosProjectRepository>()
-    .AddSingleton<IEntitiesRepository, CosmosEntitiesRepository>();
+builder.Services.AddSingleton<RecyclableMemoryStreamManager>();
+
+builder.Host.ConfigureTaskHubWorker((context, builder) =>
+{
+    builder.WithOrchestrationService(sp =>
+    {
+        if (sp.GetRequiredService<IOptions<AzureStorageOrchestrationServiceSettings>>().Value is { StorageConnectionString: { } } config)
+        {
+            return new AzureStorageOrchestrationService(config);
+        }
+        else
+        {
+            sp.GetRequiredService<ILoggerFactory>().CreateLogger("Program.cs").LogWarning("No storage account found - using local emulator for durable tasks.");
+            return new LocalOrchestrationService();
+        }
+    });
+
+    builder.Services.AddOptions<AzureStorageOrchestrationServiceSettings>()
+        .Configure<IHostEnvironment>((options, env) =>
+        {
+            options.AppName = env.ApplicationName;
+            options.StorageConnectionString = context.Configuration["AzureWebJobsStorage"];
+        })
+        .Bind(context.Configuration.GetSection("DurableTasks"));
+
+    builder.AddClient();
+});
 
 builder.Services
-    .AddMsDeveloperAzure(includeUserServices: true)
-    .AddMsDeveloperCache(builder.Configuration)
-    .AddMsDeveloperMsGraph();
+    .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddMicrosoftIdentityWebApi(jwtOptions => { }, identityOptions =>
+    {
+        builder.Configuration.GetSection(AzureAdOptions.Section).Bind(identityOptions);
+    })
+    .EnableTokenAcquisitionToCallDownstreamApi(clientOptions =>
+    {
+        builder.Configuration.GetSection(AzureAdOptions.Section).Bind(clientOptions);
+    })
+    .AddDistributedTokenCaches()
+    .AddDownstreamApi(string.Empty, builder.Configuration.GetSection("default"));
 
+builder.Services.AddDeveloperPlatform()
+    .AddEntitySerialization()
+    .AddOpenApi(builder.Configuration, options =>
+    {
+        options.OneOf.Add(typeof(TemplateSpec));
+        options.OneOf.Add(typeof(UserSpec));
+    })
+    .AddCosmos(builder.Configuration)
+    .AddAzure(builder.Configuration)
+    .AddProviders(builder.Configuration.GetSection("Providers"))
+    .AddMicrosoftGraph();
 
-builder.Services
-    .AddSingleton<UserService>();
-
-
-AzureAdOptions? azureAdOptions = null!;
-
-if (!builder.Configuration.TryBind(AzureAdOptions.Section, out azureAdOptions))
-    throw new InvalidOperationException($"{AzureAdOptions.Section} is not configured.");
-
-builder.Services
-    .AddMsDeveloperAuthentication(builder.Configuration, azureAdOptions)
-    .AddMsDeveloperAuthorization();
-
+if (builder.Environment.IsDesignTime())
+{
+    builder.Host.ConfigureDesignTime();
+}
 
 if (builder.Environment.IsDevelopment())
+{
     builder.Services.AddCors(options =>
         options.AddPolicy(AllowLocalhost, policy =>
             policy.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader()));
-
-
-builder.Services
-    .AddControllers();
-
-builder.Services
-    .AddMsDeveloperSwagger(builder.Configuration, azureAdOptions);
-
+}
 
 var app = builder.Build();
 
@@ -75,13 +99,25 @@ app.UseHttpsRedirection();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
-    app.UseMsDeveloperSwagger(azureAdOptions!.ClientId);
     app.UseCors(AllowLocalhost);
 }
+app.UseSwagger();
+app.UseSwaggerUI();
 
-
+app.UseAuthentication();
 app.UseAuthorization();
+app.UseDeveloperPlatform();
 
-app.MapControllers();
+// For container healthchecks
+app.MapGet("/", () => Environment.GetEnvironmentVariable("DEVELOPER_API_IMAGE_VERSION") is string version ? version : "OK")
+    // We don't need it to be showing up in OpenAPI definitions
+    .ExcludeFromDescription();
+
+app.MapDeveloperPlatform();
+
+if (app.Environment.IsDevelopment())
+{
+    app.MapProviderPassthrough();
+}
 
 app.Run();

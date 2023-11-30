@@ -1,0 +1,16 @@
+{
+  "solution": {
+    "path": "Microsoft.Developer.sln",
+    "projects": [
+      "src\\Microsoft.Developer.Abstractions\\Microsoft.Developer.Abstractions.csproj",
+      "src\\Microsoft.Developer.Azure\\Microsoft.Developer.Azure.csproj",
+      "src\\Microsoft.Developer.DurableTasks\\Microsoft.Developer.DurableTasks.csproj",
+      "src\\Microsoft.Developer.Hosting.AspNetCore\\Microsoft.Developer.Hosting.AspNetCore.csproj",
+      "src\\Microsoft.Developer.Hosting.Functions\\Microsoft.Developer.Hosting.Functions.csproj",
+      "src\\Microsoft.Developer.Hosting\\Microsoft.Developer.Hosting.csproj",
+      "src\\Microsoft.Developer.MSGraph\\Microsoft.Developer.MSGraph.csproj",
+      "src\\Microsoft.Developer.Providers\\Microsoft.Developer.Providers.csproj",
+      "src\\Microsoft.Developer.Serialization.Json\\Microsoft.Developer.Serialization.Json.csproj"
+    ]
+  }
+}
