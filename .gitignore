@@ -25,6 +25,7 @@ x64/
 x86/
 [Ww][Ii][Nn]32/
 [Aa][Rr][Mm]/
+!/src/Microsoft.Developer.Azure/Arm
 [Aa][Rr][Mm]64/
 bld/
 [Bb]in/
@@ -378,11 +379,12 @@ FodyWeavers.xsd
 
 # VS Code files for those working on multiple tools
 .vscode/*
+*.code-workspace
 !.vscode/settings.json
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
-*.code-workspace
+!developer-platform.code-workspace
 
 # Local History for Visual Studio Code
 .history/
@@ -397,22 +399,34 @@ FodyWeavers.xsd
 # JetBrains Rider
 *.sln.iml
 
+.DS_Store
+
 .local
 docs/.local
-.DS_Store
-appsettings.Development.json
 
-local.bicep
-provider.bicep
-.env.development
-deploy
+secrets.*
 
-openapi/openapi.json
-openapi/openapi.yaml
+test.*.bicepparam
+
+# appsettings.Development.json
+*.json.zip
+
+local.settings.json
+
+# .env.development
 
 sdks/**
-
 schemas/**
 
-*.json.zip
-docs/**
+deploy/**
+**/*.pem
+
+/deploy/**/params
+/deploy/**/testparams
+/deploy/**/portal
+/deploy/local
+
+local.bicep
+all.bicep
+
+**/home
