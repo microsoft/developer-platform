@@ -1,0 +1,1871 @@
+openapi: 3.0.1
+info:
+  title: 'Microsoft.Developer.Api, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null'
+  version: '1.0'
+paths:
+  '/entities/API/{id}':
+    get:
+      tags:
+        - Entity
+      parameters:
+        - name: id
+          in: path
+          required: true
+          style: simple
+          schema:
+            pattern: '^[a-z]*$'
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/API'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/API'
+  '/entities/Component/{id}':
+    get:
+      tags:
+        - Entity
+      parameters:
+        - name: id
+          in: path
+          required: true
+          style: simple
+          schema:
+            pattern: '^[a-z]*$'
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/Component'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Component'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Component'
+  '/entities/Domain/{id}':
+    get:
+      tags:
+        - Entity
+      parameters:
+        - name: id
+          in: path
+          required: true
+          style: simple
+          schema:
+            pattern: '^[a-z]*$'
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/Domain'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Domain'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Domain'
+  '/entities/Group/{id}':
+    get:
+      tags:
+        - Entity
+      parameters:
+        - name: id
+          in: path
+          required: true
+          style: simple
+          schema:
+            pattern: '^[a-z]*$'
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/Group'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Group'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Group'
+  '/entities/Location/{id}':
+    get:
+      tags:
+        - Entity
+      parameters:
+        - name: id
+          in: path
+          required: true
+          style: simple
+          schema:
+            pattern: '^[a-z]*$'
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/Location'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Location'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Location'
+  '/entities/Project/{id}':
+    get:
+      tags:
+        - Entity
+      parameters:
+        - name: id
+          in: path
+          required: true
+          style: simple
+          schema:
+            pattern: '^[a-z]*$'
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/Project'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Project'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Project'
+  '/entities/Provider/{id}':
+    get:
+      tags:
+        - Entity
+      parameters:
+        - name: id
+          in: path
+          required: true
+          style: simple
+          schema:
+            pattern: '^[a-z]*$'
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/Provider'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Provider'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Provider'
+  '/entities/Resource/{id}':
+    get:
+      tags:
+        - Entity
+      parameters:
+        - name: id
+          in: path
+          required: true
+          style: simple
+          schema:
+            pattern: '^[a-z]*$'
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/Resource'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Resource'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Resource'
+  '/entities/System/{id}':
+    get:
+      tags:
+        - Entity
+      parameters:
+        - name: id
+          in: path
+          required: true
+          style: simple
+          schema:
+            pattern: '^[a-z]*$'
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/System'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/System'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/System'
+  '/entities/Template/{id}':
+    get:
+      tags:
+        - Entity
+      parameters:
+        - name: id
+          in: path
+          required: true
+          style: simple
+          schema:
+            pattern: '^[a-z]*$'
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/Template'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Template'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Template'
+  '/entities/User/{id}':
+    get:
+      tags:
+        - Entity
+      parameters:
+        - name: id
+          in: path
+          required: true
+          style: simple
+          schema:
+            pattern: '^[a-z]*$'
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/User'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/User'
+  /projects:
+    get:
+      tags:
+        - Project
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Project'
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Project'
+            text/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Project'
+  '/{projectId}':
+    get:
+      tags:
+        - Project
+      parameters:
+        - name: projectId
+          in: path
+          required: true
+          style: simple
+          schema:
+            pattern: '^[a-z]*$'
+            type: string
+      responses:
+        '200':
+          description: Success
+  /:
+    get:
+      tags:
+        - Root
+      responses:
+        '200':
+          description: Success
+  /me:
+    get:
+      tags:
+        - User
+      responses:
+        '200':
+          description: Success
+  /users:
+    get:
+      tags:
+        - User
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
+            text/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
+  '/users/{userId}':
+    get:
+      tags:
+        - User
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          style: simple
+          schema:
+            pattern: '^[a-z]*$'
+            type: string
+      responses:
+        '200':
+          description: Success
+components:
+  schemas:
+    API:
+      type: object
+      properties:
+        apiVersion:
+          type: string
+          nullable: true
+        provider:
+          type: string
+          nullable: true
+        ref:
+          $ref: '#/components/schemas/EntityRef'
+        metadata:
+          $ref: '#/components/schemas/APIMetadata'
+        spec:
+          $ref: '#/components/schemas/APISpec'
+        relations:
+          type: array
+          items:
+            $ref: '#/components/schemas/Relation'
+          nullable: true
+        id:
+          type: string
+          nullable: true
+        tenant:
+          type: string
+          nullable: true
+        status:
+          $ref: '#/components/schemas/APIStatus'
+        kind:
+          type: string
+          nullable: true
+          readOnly: true
+      additionalProperties: false
+    APIMetadata:
+      type: object
+      properties:
+        name:
+          type: string
+          nullable: true
+        uid:
+          type: string
+          nullable: true
+        tenant:
+          type: string
+          nullable: true
+        namespace:
+          type: string
+          nullable: true
+        title:
+          type: string
+          nullable: true
+        description:
+          type: string
+          nullable: true
+        labels:
+          type: object
+          additionalProperties:
+            type: string
+            nullable: true
+          nullable: true
+        annotations:
+          type: object
+          additionalProperties:
+            type: string
+            nullable: true
+          nullable: true
+        tags:
+          type: array
+          items:
+            type: string
+          nullable: true
+        links:
+          type: array
+          items:
+            $ref: '#/components/schemas/Link'
+          nullable: true
+        additionalProperties:
+          type: object
+          additionalProperties:
+            nullable: true
+          nullable: true
+      additionalProperties: false
+    APISpec:
+      type: object
+      properties:
+        additionalProperties:
+          type: object
+          additionalProperties:
+            nullable: true
+          nullable: true
+        type:
+          type: string
+          nullable: true
+        lifecycle:
+          type: string
+          nullable: true
+        owner:
+          $ref: '#/components/schemas/EntityRef'
+        system:
+          $ref: '#/components/schemas/SystemEntityRef'
+        definition:
+          type: string
+          nullable: true
+      additionalProperties: false
+    APIStatus:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/StatusItem'
+          nullable: true
+        additionalProperties:
+          type: object
+          additionalProperties:
+            nullable: true
+          nullable: true
+      additionalProperties: false
+    Component:
+      type: object
+      properties:
+        apiVersion:
+          type: string
+          nullable: true
+        provider:
+          type: string
+          nullable: true
+        ref:
+          $ref: '#/components/schemas/EntityRef'
+        metadata:
+          $ref: '#/components/schemas/ComponentMetadata'
+        spec:
+          $ref: '#/components/schemas/ComponentSpec'
+        relations:
+          type: array
+          items:
+            $ref: '#/components/schemas/Relation'
+          nullable: true
+        id:
+          type: string
+          nullable: true
+        tenant:
+          type: string
+          nullable: true
+        status:
+          $ref: '#/components/schemas/ComponentStatus'
+        kind:
+          type: string
+          nullable: true
+          readOnly: true
+      additionalProperties: false
+    ComponentMetadata:
+      type: object
+      properties:
+        name:
+          type: string
+          nullable: true
+        uid:
+          type: string
+          nullable: true
+        tenant:
+          type: string
+          nullable: true
+        namespace:
+          type: string
+          nullable: true
+        title:
+          type: string
+          nullable: true
+        description:
+          type: string
+          nullable: true
+        labels:
+          type: object
+          additionalProperties:
+            type: string
+            nullable: true
+          nullable: true
+        annotations:
+          type: object
+          additionalProperties:
+            type: string
+            nullable: true
+          nullable: true
+        tags:
+          type: array
+          items:
+            type: string
+          nullable: true
+        links:
+          type: array
+          items:
+            $ref: '#/components/schemas/Link'
+          nullable: true
+        additionalProperties:
+          type: object
+          additionalProperties:
+            nullable: true
+          nullable: true
+      additionalProperties: false
+    ComponentSpec:
+      type: object
+      properties:
+        additionalProperties:
+          type: object
+          additionalProperties:
+            nullable: true
+          nullable: true
+        type:
+          type: string
+          nullable: true
+        lifecycle:
+          type: string
+          nullable: true
+        owner:
+          $ref: '#/components/schemas/EntityRef'
+        dependsOn:
+          type: array
+          items:
+            $ref: '#/components/schemas/EntityRef'
+          nullable: true
+      additionalProperties: false
+    ComponentStatus:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/StatusItem'
+          nullable: true
+        additionalProperties:
+          type: object
+          additionalProperties:
+            nullable: true
+          nullable: true
+      additionalProperties: false
+    Domain:
+      type: object
+      properties:
+        apiVersion:
+          type: string
+          nullable: true
+        provider:
+          type: string
+          nullable: true
+        ref:
+          $ref: '#/components/schemas/EntityRef'
+        metadata:
+          $ref: '#/components/schemas/DomainMetadata'
+        spec:
+          $ref: '#/components/schemas/DomainSpec'
+        relations:
+          type: array
+          items:
+            $ref: '#/components/schemas/Relation'
+          nullable: true
+        id:
+          type: string
+          nullable: true
+        tenant:
+          type: string
+          nullable: true
+        status:
+          $ref: '#/components/schemas/DomainStatus'
+        kind:
+          type: string
+          nullable: true
+          readOnly: true
+      additionalProperties: false
+    DomainEntityRef:
+      type: object
+      properties:
+        kind:
+          type: string
+          nullable: true
+          readOnly: true
+        provider:
+          type: string
+          nullable: true
+          readOnly: true
+        name:
+          type: string
+          nullable: true
+          readOnly: true
+        namespace:
+          type: string
+          nullable: true
+          readOnly: true
+        id:
+          type: string
+          nullable: true
+      additionalProperties: false
+    DomainMetadata:
+      type: object
+      properties:
+        name:
+          type: string
+          nullable: true
+        uid:
+          type: string
+          nullable: true
+        tenant:
+          type: string
+          nullable: true
+        namespace:
+          type: string
+          nullable: true
+        title:
+          type: string
+          nullable: true
+        description:
+          type: string
+          nullable: true
+        labels:
+          type: object
+          additionalProperties:
+            type: string
+            nullable: true
+          nullable: true
+        annotations:
+          type: object
+          additionalProperties:
+            type: string
+            nullable: true
+          nullable: true
+        tags:
+          type: array
+          items:
+            type: string
+          nullable: true
+        links:
+          type: array
+          items:
+            $ref: '#/components/schemas/Link'
+          nullable: true
+        additionalProperties:
+          type: object
+          additionalProperties:
+            nullable: true
+          nullable: true
+      additionalProperties: false
+    DomainSpec:
+      type: object
+      properties:
+        additionalProperties:
+          type: object
+          additionalProperties:
+            nullable: true
+          nullable: true
+        owner:
+          $ref: '#/components/schemas/EntityRef'
+      additionalProperties: false
+    DomainStatus:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/StatusItem'
+          nullable: true
+        additionalProperties:
+          type: object
+          additionalProperties:
+            nullable: true
+          nullable: true
+      additionalProperties: false
+    EntityRef:
+      type: object
+      properties:
+        kind:
+          type: string
+          nullable: true
+          readOnly: true
+        provider:
+          type: string
+          nullable: true
+          readOnly: true
+        name:
+          type: string
+          nullable: true
+          readOnly: true
+        namespace:
+          type: string
+          nullable: true
+          readOnly: true
+        id:
+          type: string
+          nullable: true
+      additionalProperties: false
+    Group:
+      type: object
+      properties:
+        apiVersion:
+          type: string
+          nullable: true
+        provider:
+          type: string
+          nullable: true
+        ref:
+          $ref: '#/components/schemas/EntityRef'
+        metadata:
+          $ref: '#/components/schemas/GroupMetadata'
+        spec:
+          $ref: '#/components/schemas/GroupSpec'
+        relations:
+          type: array
+          items:
+            $ref: '#/components/schemas/Relation'
+          nullable: true
+        id:
+          type: string
+          nullable: true
+        tenant:
+          type: string
+          nullable: true
+        status:
+          $ref: '#/components/schemas/GroupStatus'
+        kind:
+          type: string
+          nullable: true
+          readOnly: true
+      additionalProperties: false
+    GroupEntityRef:
+      type: object
+      properties:
+        kind:
+          type: string
+          nullable: true
+          readOnly: true
+        provider:
+          type: string
+          nullable: true
+          readOnly: true
+        name:
+          type: string
+          nullable: true
+          readOnly: true
+        namespace:
+          type: string
+          nullable: true
+          readOnly: true
+        id:
+          type: string
+          nullable: true
+      additionalProperties: false
+    GroupMetadata:
+      type: object
+      properties:
+        name:
+          type: string
+          nullable: true
+        uid:
+          type: string
+          nullable: true
+        tenant:
+          type: string
+          nullable: true
+        namespace:
+          type: string
+          nullable: true
+        title:
+          type: string
+          nullable: true
+        description:
+          type: string
+          nullable: true
+        labels:
+          type: object
+          additionalProperties:
+            type: string
+            nullable: true
+          nullable: true
+        annotations:
+          type: object
+          additionalProperties:
+            type: string
+            nullable: true
+          nullable: true
+        tags:
+          type: array
+          items:
+            type: string
+          nullable: true
+        links:
+          type: array
+          items:
+            $ref: '#/components/schemas/Link'
+          nullable: true
+        additionalProperties:
+          type: object
+          additionalProperties:
+            nullable: true
+          nullable: true
+      additionalProperties: false
+    GroupSpec:
+      type: object
+      properties:
+        additionalProperties:
+          type: object
+          additionalProperties:
+            nullable: true
+          nullable: true
+        type:
+          type: string
+          nullable: true
+        profile:
+          $ref: '#/components/schemas/JsonNode'
+        parent:
+          $ref: '#/components/schemas/GroupEntityRef'
+        children:
+          type: array
+          items:
+            $ref: '#/components/schemas/GroupEntityRef'
+          nullable: true
+        members:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserEntityRef'
+          nullable: true
+      additionalProperties: false
+    GroupStatus:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/StatusItem'
+          nullable: true
+        additionalProperties:
+          type: object
+          additionalProperties:
+            nullable: true
+          nullable: true
+      additionalProperties: false
+    IStatusItemError:
+      type: object
+      properties:
+        name:
+          type: string
+          nullable: true
+        message:
+          type: string
+          nullable: true
+        code:
+          type: string
+          nullable: true
+      additionalProperties: false
+    JsonNode:
+      type: object
+      properties:
+        options:
+          $ref: '#/components/schemas/JsonNodeOptions'
+        parent:
+          $ref: '#/components/schemas/JsonNode'
+        root:
+          $ref: '#/components/schemas/JsonNode'
+      additionalProperties: false
+    JsonNodeOptions:
+      type: object
+      properties:
+        propertyNameCaseInsensitive:
+          type: boolean
+      additionalProperties: false
+    Link:
+      type: object
+      properties:
+        url:
+          type: string
+          nullable: true
+        title:
+          type: string
+          nullable: true
+        icon:
+          type: string
+          nullable: true
+        type:
+          type: string
+          nullable: true
+      additionalProperties: false
+    Location:
+      type: object
+      properties:
+        apiVersion:
+          type: string
+          nullable: true
+        provider:
+          type: string
+          nullable: true
+        ref:
+          $ref: '#/components/schemas/EntityRef'
+        metadata:
+          $ref: '#/components/schemas/LocationMetadata'
+        spec:
+          $ref: '#/components/schemas/LocationSpec'
+        relations:
+          type: array
+          items:
+            $ref: '#/components/schemas/Relation'
+          nullable: true
+        id:
+          type: string
+          nullable: true
+        tenant:
+          type: string
+          nullable: true
+        status:
+          $ref: '#/components/schemas/LocationStatus'
+        kind:
+          type: string
+          nullable: true
+          readOnly: true
+      additionalProperties: false
+    LocationMetadata:
+      type: object
+      properties:
+        name:
+          type: string
+          nullable: true
+        uid:
+          type: string
+          nullable: true
+        tenant:
+          type: string
+          nullable: true
+        namespace:
+          type: string
+          nullable: true
+        title:
+          type: string
+          nullable: true
+        description:
+          type: string
+          nullable: true
+        labels:
+          type: object
+          additionalProperties:
+            type: string
+            nullable: true
+          nullable: true
+        annotations:
+          type: object
+          additionalProperties:
+            type: string
+            nullable: true
+          nullable: true
+        tags:
+          type: array
+          items:
+            type: string
+          nullable: true
+        links:
+          type: array
+          items:
+            $ref: '#/components/schemas/Link'
+          nullable: true
+        additionalProperties:
+          type: object
+          additionalProperties:
+            nullable: true
+          nullable: true
+      additionalProperties: false
+    LocationSpec:
+      type: object
+      properties:
+        additionalProperties:
+          type: object
+          additionalProperties:
+            nullable: true
+          nullable: true
+        type:
+          type: string
+          nullable: true
+        target:
+          type: string
+          nullable: true
+        targets:
+          type: array
+          items:
+            type: string
+          nullable: true
+        presence:
+          type: string
+          nullable: true
+      additionalProperties: false
+    LocationStatus:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/StatusItem'
+          nullable: true
+        additionalProperties:
+          type: object
+          additionalProperties:
+            nullable: true
+          nullable: true
+      additionalProperties: false
+    Project:
+      type: object
+      properties:
+        apiVersion:
+          type: string
+          nullable: true
+        provider:
+          type: string
+          nullable: true
+        ref:
+          $ref: '#/components/schemas/EntityRef'
+        metadata:
+          $ref: '#/components/schemas/ProjectMetadata'
+        spec:
+          $ref: '#/components/schemas/ProjectSpec'
+        relations:
+          type: array
+          items:
+            $ref: '#/components/schemas/Relation'
+          nullable: true
+        id:
+          type: string
+          nullable: true
+        tenant:
+          type: string
+          nullable: true
+        status:
+          $ref: '#/components/schemas/ProjectStatus'
+        kind:
+          type: string
+          nullable: true
+          readOnly: true
+      additionalProperties: false
+    ProjectMetadata:
+      type: object
+      properties:
+        name:
+          type: string
+          nullable: true
+        uid:
+          type: string
+          nullable: true
+        tenant:
+          type: string
+          nullable: true
+        namespace:
+          type: string
+          nullable: true
+        title:
+          type: string
+          nullable: true
+        description:
+          type: string
+          nullable: true
+        labels:
+          type: object
+          additionalProperties:
+            type: string
+            nullable: true
+          nullable: true
+        annotations:
+          type: object
+          additionalProperties:
+            type: string
+            nullable: true
+          nullable: true
+        tags:
+          type: array
+          items:
+            type: string
+          nullable: true
+        links:
+          type: array
+          items:
+            $ref: '#/components/schemas/Link'
+          nullable: true
+        additionalProperties:
+          type: object
+          additionalProperties:
+            nullable: true
+          nullable: true
+      additionalProperties: false
+    ProjectSpec:
+      type: object
+      properties:
+        additionalProperties:
+          type: object
+          additionalProperties:
+            nullable: true
+          nullable: true
+      additionalProperties: false
+    ProjectStatus:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/StatusItem'
+          nullable: true
+        additionalProperties:
+          type: object
+          additionalProperties:
+            nullable: true
+          nullable: true
+      additionalProperties: false
+    Provider:
+      type: object
+      properties:
+        apiVersion:
+          type: string
+          nullable: true
+        provider:
+          type: string
+          nullable: true
+        ref:
+          $ref: '#/components/schemas/EntityRef'
+        metadata:
+          $ref: '#/components/schemas/ProviderMetadata'
+        spec:
+          $ref: '#/components/schemas/ProviderSpec'
+        relations:
+          type: array
+          items:
+            $ref: '#/components/schemas/Relation'
+          nullable: true
+        id:
+          type: string
+          nullable: true
+        tenant:
+          type: string
+          nullable: true
+        status:
+          $ref: '#/components/schemas/ProviderStatus'
+        kind:
+          type: string
+          nullable: true
+          readOnly: true
+      additionalProperties: false
+    ProviderMetadata:
+      type: object
+      properties:
+        name:
+          type: string
+          nullable: true
+        uid:
+          type: string
+          nullable: true
+        tenant:
+          type: string
+          nullable: true
+        namespace:
+          type: string
+          nullable: true
+        title:
+          type: string
+          nullable: true
+        description:
+          type: string
+          nullable: true
+        labels:
+          type: object
+          additionalProperties:
+            type: string
+            nullable: true
+          nullable: true
+        annotations:
+          type: object
+          additionalProperties:
+            type: string
+            nullable: true
+          nullable: true
+        tags:
+          type: array
+          items:
+            type: string
+          nullable: true
+        links:
+          type: array
+          items:
+            $ref: '#/components/schemas/Link'
+          nullable: true
+        additionalProperties:
+          type: object
+          additionalProperties:
+            nullable: true
+          nullable: true
+      additionalProperties: false
+    ProviderSpec:
+      type: object
+      properties:
+        additionalProperties:
+          type: object
+          additionalProperties:
+            nullable: true
+          nullable: true
+      additionalProperties: false
+    ProviderStatus:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/StatusItem'
+          nullable: true
+        additionalProperties:
+          type: object
+          additionalProperties:
+            nullable: true
+          nullable: true
+      additionalProperties: false
+    Relation:
+      type: object
+      properties:
+        type:
+          type: string
+          nullable: true
+        targetRef:
+          $ref: '#/components/schemas/EntityRef'
+        target:
+          $ref: '#/components/schemas/RelationTarget'
+      additionalProperties: false
+    RelationTarget:
+      type: object
+      properties:
+        kind:
+          type: string
+          nullable: true
+        provider:
+          type: string
+          nullable: true
+        name:
+          type: string
+          nullable: true
+        namespace:
+          type: string
+          nullable: true
+      additionalProperties: false
+    Resource:
+      type: object
+      properties:
+        apiVersion:
+          type: string
+          nullable: true
+        provider:
+          type: string
+          nullable: true
+        ref:
+          $ref: '#/components/schemas/EntityRef'
+        metadata:
+          $ref: '#/components/schemas/ResourceMetadata'
+        spec:
+          $ref: '#/components/schemas/ResourceSpec'
+        relations:
+          type: array
+          items:
+            $ref: '#/components/schemas/Relation'
+          nullable: true
+        id:
+          type: string
+          nullable: true
+        tenant:
+          type: string
+          nullable: true
+        status:
+          $ref: '#/components/schemas/ResourceStatus'
+        kind:
+          type: string
+          nullable: true
+          readOnly: true
+      additionalProperties: false
+    ResourceMetadata:
+      type: object
+      properties:
+        name:
+          type: string
+          nullable: true
+        uid:
+          type: string
+          nullable: true
+        tenant:
+          type: string
+          nullable: true
+        namespace:
+          type: string
+          nullable: true
+        title:
+          type: string
+          nullable: true
+        description:
+          type: string
+          nullable: true
+        labels:
+          type: object
+          additionalProperties:
+            type: string
+            nullable: true
+          nullable: true
+        annotations:
+          type: object
+          additionalProperties:
+            type: string
+            nullable: true
+          nullable: true
+        tags:
+          type: array
+          items:
+            type: string
+          nullable: true
+        links:
+          type: array
+          items:
+            $ref: '#/components/schemas/Link'
+          nullable: true
+        additionalProperties:
+          type: object
+          additionalProperties:
+            nullable: true
+          nullable: true
+      additionalProperties: false
+    ResourceSpec:
+      type: object
+      properties:
+        additionalProperties:
+          type: object
+          additionalProperties:
+            nullable: true
+          nullable: true
+        type:
+          type: string
+          nullable: true
+        owner:
+          $ref: '#/components/schemas/EntityRef'
+        system:
+          $ref: '#/components/schemas/SystemEntityRef'
+        lifecycle:
+          type: string
+          nullable: true
+        dependsOn:
+          type: array
+          items:
+            $ref: '#/components/schemas/EntityRef'
+          nullable: true
+        dependencyOf:
+          type: array
+          items:
+            $ref: '#/components/schemas/EntityRef'
+          nullable: true
+      additionalProperties: false
+    ResourceStatus:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/StatusItem'
+          nullable: true
+        additionalProperties:
+          type: object
+          additionalProperties:
+            nullable: true
+          nullable: true
+      additionalProperties: false
+    StatusItem:
+      type: object
+      properties:
+        type:
+          type: string
+          nullable: true
+        level:
+          $ref: '#/components/schemas/StatusItemLevel'
+        message:
+          type: string
+          nullable: true
+        error:
+          $ref: '#/components/schemas/IStatusItemError'
+        additionalProperties:
+          type: object
+          additionalProperties:
+            nullable: true
+          nullable: true
+      additionalProperties: false
+    StatusItemLevel:
+      enum:
+        - 0
+        - 1
+        - 2
+      type: integer
+      format: int32
+    System:
+      type: object
+      properties:
+        apiVersion:
+          type: string
+          nullable: true
+        provider:
+          type: string
+          nullable: true
+        ref:
+          $ref: '#/components/schemas/EntityRef'
+        metadata:
+          $ref: '#/components/schemas/SystemMetadata'
+        spec:
+          $ref: '#/components/schemas/SystemSpec'
+        relations:
+          type: array
+          items:
+            $ref: '#/components/schemas/Relation'
+          nullable: true
+        id:
+          type: string
+          nullable: true
+        tenant:
+          type: string
+          nullable: true
+        status:
+          $ref: '#/components/schemas/SystemStatus'
+        kind:
+          type: string
+          nullable: true
+          readOnly: true
+      additionalProperties: false
+    SystemEntityRef:
+      type: object
+      properties:
+        kind:
+          type: string
+          nullable: true
+          readOnly: true
+        provider:
+          type: string
+          nullable: true
+          readOnly: true
+        name:
+          type: string
+          nullable: true
+          readOnly: true
+        namespace:
+          type: string
+          nullable: true
+          readOnly: true
+        id:
+          type: string
+          nullable: true
+      additionalProperties: false
+    SystemMetadata:
+      type: object
+      properties:
+        name:
+          type: string
+          nullable: true
+        uid:
+          type: string
+          nullable: true
+        tenant:
+          type: string
+          nullable: true
+        namespace:
+          type: string
+          nullable: true
+        title:
+          type: string
+          nullable: true
+        description:
+          type: string
+          nullable: true
+        labels:
+          type: object
+          additionalProperties:
+            type: string
+            nullable: true
+          nullable: true
+        annotations:
+          type: object
+          additionalProperties:
+            type: string
+            nullable: true
+          nullable: true
+        tags:
+          type: array
+          items:
+            type: string
+          nullable: true
+        links:
+          type: array
+          items:
+            $ref: '#/components/schemas/Link'
+          nullable: true
+        additionalProperties:
+          type: object
+          additionalProperties:
+            nullable: true
+          nullable: true
+      additionalProperties: false
+    SystemSpec:
+      type: object
+      properties:
+        additionalProperties:
+          type: object
+          additionalProperties:
+            nullable: true
+          nullable: true
+        owner:
+          $ref: '#/components/schemas/EntityRef'
+        domain:
+          $ref: '#/components/schemas/DomainEntityRef'
+      additionalProperties: false
+    SystemStatus:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/StatusItem'
+          nullable: true
+        additionalProperties:
+          type: object
+          additionalProperties:
+            nullable: true
+          nullable: true
+      additionalProperties: false
+    Template:
+      type: object
+      properties:
+        apiVersion:
+          type: string
+          nullable: true
+        provider:
+          type: string
+          nullable: true
+        ref:
+          $ref: '#/components/schemas/EntityRef'
+        metadata:
+          $ref: '#/components/schemas/TemplateMetadata'
+        spec:
+          $ref: '#/components/schemas/TemplateSpec'
+        relations:
+          type: array
+          items:
+            $ref: '#/components/schemas/Relation'
+          nullable: true
+        id:
+          type: string
+          nullable: true
+        tenant:
+          type: string
+          nullable: true
+        status:
+          $ref: '#/components/schemas/TemplateStatus'
+        kind:
+          type: string
+          nullable: true
+          readOnly: true
+      additionalProperties: false
+    TemplateMetadata:
+      type: object
+      properties:
+        name:
+          type: string
+          nullable: true
+        uid:
+          type: string
+          nullable: true
+        tenant:
+          type: string
+          nullable: true
+        namespace:
+          type: string
+          nullable: true
+        title:
+          type: string
+          nullable: true
+        description:
+          type: string
+          nullable: true
+        labels:
+          type: object
+          additionalProperties:
+            type: string
+            nullable: true
+          nullable: true
+        annotations:
+          type: object
+          additionalProperties:
+            type: string
+            nullable: true
+          nullable: true
+        tags:
+          type: array
+          items:
+            type: string
+          nullable: true
+        links:
+          type: array
+          items:
+            $ref: '#/components/schemas/Link'
+          nullable: true
+        additionalProperties:
+          type: object
+          additionalProperties:
+            nullable: true
+          nullable: true
+      additionalProperties: false
+    TemplateSpec:
+      type: object
+      properties:
+        additionalProperties:
+          type: object
+          additionalProperties:
+            nullable: true
+          nullable: true
+        inputParametersJsonSchema:
+          type: string
+          nullable: true
+      additionalProperties: false
+    TemplateStatus:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/StatusItem'
+          nullable: true
+        additionalProperties:
+          type: object
+          additionalProperties:
+            nullable: true
+          nullable: true
+      additionalProperties: false
+    User:
+      type: object
+      properties:
+        apiVersion:
+          type: string
+          nullable: true
+        provider:
+          type: string
+          nullable: true
+        ref:
+          $ref: '#/components/schemas/EntityRef'
+        metadata:
+          $ref: '#/components/schemas/UserMetadata'
+        spec:
+          $ref: '#/components/schemas/UserSpec'
+        relations:
+          type: array
+          items:
+            $ref: '#/components/schemas/Relation'
+          nullable: true
+        id:
+          type: string
+          nullable: true
+        tenant:
+          type: string
+          nullable: true
+        status:
+          $ref: '#/components/schemas/UserStatus'
+        kind:
+          type: string
+          nullable: true
+          readOnly: true
+      additionalProperties: false
+    UserEntityRef:
+      type: object
+      properties:
+        kind:
+          type: string
+          nullable: true
+          readOnly: true
+        provider:
+          type: string
+          nullable: true
+          readOnly: true
+        name:
+          type: string
+          nullable: true
+          readOnly: true
+        namespace:
+          type: string
+          nullable: true
+          readOnly: true
+        id:
+          type: string
+          nullable: true
+      additionalProperties: false
+    UserMetadata:
+      type: object
+      properties:
+        name:
+          type: string
+          nullable: true
+        uid:
+          type: string
+          nullable: true
+        tenant:
+          type: string
+          nullable: true
+        namespace:
+          type: string
+          nullable: true
+        title:
+          type: string
+          nullable: true
+        description:
+          type: string
+          nullable: true
+        labels:
+          type: object
+          additionalProperties:
+            type: string
+            nullable: true
+          nullable: true
+        annotations:
+          type: object
+          additionalProperties:
+            type: string
+            nullable: true
+          nullable: true
+        tags:
+          type: array
+          items:
+            type: string
+          nullable: true
+        links:
+          type: array
+          items:
+            $ref: '#/components/schemas/Link'
+          nullable: true
+        additionalProperties:
+          type: object
+          additionalProperties:
+            nullable: true
+          nullable: true
+      additionalProperties: false
+    UserProfile:
+      type: object
+      properties:
+        displayName:
+          type: string
+          nullable: true
+        jobTitle:
+          type: string
+          nullable: true
+        email:
+          type: string
+          nullable: true
+        additionalProperties:
+          type: object
+          additionalProperties:
+            nullable: true
+          nullable: true
+      additionalProperties: false
+    UserRole:
+      enum:
+        - None
+        - Member
+        - Admin
+        - Owner
+        - Provider
+      type: string
+    UserSpec:
+      type: object
+      properties:
+        additionalProperties:
+          type: object
+          additionalProperties:
+            nullable: true
+          nullable: true
+        role:
+          $ref: '#/components/schemas/UserRole'
+        profile:
+          $ref: '#/components/schemas/UserProfile'
+        memberOf:
+          type: array
+          items:
+            $ref: '#/components/schemas/GroupEntityRef'
+          nullable: true
+      additionalProperties: false
+    UserStatus:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/StatusItem'
+          nullable: true
+        additionalProperties:
+          type: object
+          additionalProperties:
+            nullable: true
+          nullable: true
+      additionalProperties: false
+  securitySchemes:
+    OpenId:
+      type: openIdConnect
+      openIdConnectUrl: https://login.microsoftonline.com/ec509c4c-6b8f-4558-a7b7-030ff99b57e0/v2.0/.well-known/openid-configuration
+security:
+  - OpenId:
+      - openid
+      - profile
+      - offline_access
+      - api://5ae8544e-23d2-4561-a96d-d1e561a0a674/.default
