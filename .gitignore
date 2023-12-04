@@ -430,5 +430,5 @@ all.bicep
 
 **/home
 
-deploy/**
-docs/**
+deploy
+docs
