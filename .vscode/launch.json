@@ -1,18 +1,31 @@
 {
+    "version": "0.2.0",
     "configurations": [
+        {
+            "name": "API (coreclr)",
+            "type": "coreclr",
+            "request": "launch",
+            "program": "${workspaceFolder}/artifacts/bin/Microsoft.Developer.Api/debug/Microsoft.Developer.Api.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/Microsoft.Developer.Api",
+            "env": {
+                "DEVELOPER_API_IMAGE_VERSION": "debug"
+            },
+            "stopAtEntry": false,
+            "presentation": {
+                "hidden": true,
+            },
+        },
         {
             "name": "API",
             "type": "dotnet",
             "request": "launch",
             "projectPath": "${workspaceFolder}/src/Microsoft.Developer.Api/Microsoft.Developer.Api.csproj",
-            "internalConsoleOptions": "openOnSessionStart"
-        },
-        {
-            "name": "Attach to .NET Functions",
-            "type": "coreclr",
-            "request": "attach",
-            "processId": "${command:azureFunctions.pickProcess}"
+            "internalConsoleOptions": "openOnSessionStart",
+            "launchConfigurationId": "TargetFramework=;https",
+            "presentation": {
+                "hidden": true,
+            },
         }
-    ],
-    "version": "0.2.0"
+    ]
 }

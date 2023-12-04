@@ -1,7 +1,4 @@
 {
-    "azureFunctions.projectLanguage": "C#",
-    "azureFunctions.projectRuntime": "~4",
-    // "azureFunctions.projectSubpath": "",
     "files.exclude": {
         "**/.vs": true,
         "**/bin": true,
@@ -15,17 +12,13 @@
     },
     "explorer.fileNesting.patterns": {
         "*.cs": "I${capture}.cs, ${capture}JsonConverter.cs",
-        // "*.cs": "I${capture}.cs, ${capture}Spec.cs, ${capture}SpecConfig.cs, ${capture}Metadata.cs",
     },
     "markdownlint.config": {
         "default": true,
         "MD012": false,
         "MD009": false
     },
-    "dotnet.defaultSolution": "src/Microsoft.Developer.sln",
+    "dotnet.defaultSolution": "Microsoft.Developer.sln",
     "omnisharp.projectFilesExcludePattern": "**/node_modules/**,**/.git/**,**/bower_components/**,**/.local/**",
-    "azureFunctions.deploySubpath": "src/Microsoft.Developer.Orchestrator/bin/Release/net7.0/publish",
     "debug.internalConsoleOptions": "neverOpen",
-    "azureFunctions.projectSubpath": "src/Microsoft.Developer.Orchestrator",
-    "azureFunctions.preDeployTask": "publish (functions)",
 }

@@ -9,101 +9,20 @@
         "showReuseMessage": false,
     },
     "args": [],
-    "inputs": [
-        {
-            "id": "providerName",
-            "type": "pickString",
-            "description": "Provider.",
-            "default": "MSGraph",
-            "options": [
-                "Azure",
-                "DevCenter",
-                "GitHub",
-                "MSGraph"
-            ]
-        },
-        {
-            "id": "version",
-            "type": "promptString",
-            "description": "Version this release."
-        }
-    ],
+    "inputs": [],
     "tasks": [
         {
-            "label": "clean (functions)",
-            "command": "dotnet",
-            "args": [
-                "clean",
-                "/property:GenerateFullPaths=true",
-                "/consoleloggerparameters:NoSummary"
-            ],
-            "type": "process",
-            "problemMatcher": "$msCompile",
-            "options": {
-                "cwd": "${workspaceFolder}/src/Microsoft.Developer.Orchestrator"
-            }
-        },
-        {
-            "label": "build (functions)",
+            "label": "build openapi",
+            "type": "shell",
             "command": "dotnet",
             "args": [
                 "build",
-                "/property:GenerateFullPaths=true",
-                "/consoleloggerparameters:NoSummary"
+                "-t:OpenApi"
             ],
-            "type": "process",
-            "dependsOn": "clean (functions)",
-            "group": {
-                "kind": "build",
-                "isDefault": true
+            "options": {
+                "cwd": "${workspaceFolder}/Microsoft.Developer.Api"
             },
             "problemMatcher": "$msCompile",
-            "options": {
-                "cwd": "${workspaceFolder}/src/Microsoft.Developer.Orchestrator"
-            }
-        },
-        {
-            "label": "clean release (functions)",
-            "command": "dotnet",
-            "args": [
-                "clean",
-                "--configuration",
-                "Release",
-                "/property:GenerateFullPaths=true",
-                "/consoleloggerparameters:NoSummary"
-            ],
-            "type": "process",
-            "problemMatcher": "$msCompile",
-            "options": {
-                "cwd": "${workspaceFolder}/src/Microsoft.Developer.Orchestrator"
-            }
-        },
-        {
-            "label": "publish (functions)",
-            "command": "dotnet",
-            "args": [
-                "publish",
-                "--configuration",
-                "Release",
-                "/property:GenerateFullPaths=true",
-                "/consoleloggerparameters:NoSummary"
-            ],
-            "type": "process",
-            "dependsOn": "clean release (functions)",
-            "problemMatcher": "$msCompile",
-            "options": {
-                "cwd": "${workspaceFolder}/src/Microsoft.Developer.Orchestrator"
-            }
-        },
-        {
-            "type": "func",
-            "dependsOn": "build (functions)",
-            "options": {
-                "cwd": "${workspaceFolder}/src/Microsoft.Developer.Orchestrator/bin/Debug/net7.0"
-            },
-            "command": "host start",
-            "isBackground": true,
-            "problemMatcher": "$func-dotnet-watch"
         }
     ]
 }
