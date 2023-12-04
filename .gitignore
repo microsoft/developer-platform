@@ -418,7 +418,6 @@ local.settings.json
 sdks/**
 schemas/**
 
-deploy/**
 **/*.pem
 
 /deploy/**/params
@@ -430,3 +429,6 @@ local.bicep
 all.bicep
 
 **/home
+
+deploy/**
+docs/**
