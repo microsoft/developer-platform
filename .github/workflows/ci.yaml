@@ -179,7 +179,7 @@ jobs:
         run: dotnet publish --os linux --arch x64 -c Release -p:PublishProfile=DefaultContainer -p:Version="${{ env.IMAGE_VERSION }}"
 
       - name: Create Release
-        uses: actions/github-script@v6
+        uses: actions/github-script@v7
         with:
           script: |
             const releaseResult = await github.rest.repos.createRelease({
