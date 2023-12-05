@@ -7,7 +7,7 @@
             "request": "launch",
             "program": "${workspaceFolder}/artifacts/bin/Microsoft.Developer.Api/debug/Microsoft.Developer.Api.dll",
             "args": [],
-            "cwd": "${workspaceFolder}/Microsoft.Developer.Api",
+            "cwd": "${workspaceFolder}/src/Microsoft.Developer.Api",
             "env": {
                 "DEVELOPER_API_IMAGE_VERSION": "debug"
             },
