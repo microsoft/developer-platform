@@ -12,6 +12,38 @@
     "inputs": [],
     "tasks": [
         {
+            "label": "clean sln",
+            "command": "dotnet",
+            "type": "shell",
+            "args": [
+                "clean",
+                "${workspaceFolder}/Microsoft.Developer.sln",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary"
+            ],
+            "hide": true,
+            "problemMatcher": "$msCompile",
+            "presentation": {
+                "group": "build",
+            }
+        },
+        {
+            "label": "build sln",
+            "command": "dotnet",
+            "type": "shell",
+            "args": [
+                "build",
+                "${workspaceFolder}/Microsoft.Developer.sln",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary"
+            ],
+            "dependsOn": "clean sln",
+            "problemMatcher": "$msCompile",
+            "presentation": {
+                "group": "build",
+            }
+        },
+        {
             "label": "build openapi",
             "type": "shell",
             "command": "dotnet",

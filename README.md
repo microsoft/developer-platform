@@ -2,6 +2,16 @@
 
 `// TODO`
 
+## Repos
+
+| Repo                                                             | Description |
+| ---------------------------------------------------------------- | ----------- |
+| [developer-platform-devcenter][developer-platform-devcenter]     | todo        |
+| [developer-platform-github][developer-platform-github]           | todo        |
+| [developer-platform-vscode][developer-platform-vscode]           | todo        |
+| [developer-platform-vscode-chat][developer-platform-vscode-chat] | todo        |
+| [developer-platform-website][developer-platform-website]         | todo        |
+
 ## Contributing
 
 This project welcomes contributions and suggestions. Most contributions require you to agree to a
@@ -23,3 +33,9 @@ trademarks or logos is subject to and must follow
 [Microsoft's Trademark & Brand Guidelines](https://www.microsoft.com/en-us/legal/intellectualproperty/trademarks/usage/general).
 Use of Microsoft trademarks or logos in modified versions of this project must not cause confusion or imply Microsoft sponsorship.
 Any use of third-party trademarks or logos are subject to those third-party's policies.
+
+[developer-platform-devcenter]: https://github.com/microsoft/developer-platform-devcenter
+[developer-platform-github]: https://github.com/microsoft/developer-platform-github
+[developer-platform-vscode]: https://github.com/microsoft/developer-platform-vscode
+[developer-platform-vscode-chat]: https://github.com/microsoft/developer-platform-vscode-chat
+[developer-platform-website]: https://github.com/microsoft/developer-platform-website

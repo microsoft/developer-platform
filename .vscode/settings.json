@@ -11,7 +11,11 @@
         "**/node_modules": true,
     },
     "explorer.fileNesting.patterns": {
-        "*.cs": "I${capture}.cs, ${capture}JsonConverter.cs",
+        "*.cs": "I${capture}.cs, I${capture}Factory.cs, ${capture}JsonConverter.cs",
+        "*.csproj": "appsettings.json, Dockerfile, host.json, local.settings.json, .gitignore",
+        "Program.cs": "GlobalUsings.cs",
+        "appsettings.json": "appsettings.development.json, appsettings.production.json, appsettings.designtime.json",
+        "README.md": ".gitignore, .gitattributes, LICENSE, SECURITY.md, SUPPORT.md, CODE_OF_CONDUCT.md",
     },
     "markdownlint.config": {
         "default": true,
