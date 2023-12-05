@@ -8,9 +8,25 @@
 | ---------------------------------------------------------------- | ----------- |
 | [developer-platform-devcenter][developer-platform-devcenter]     | todo        |
 | [developer-platform-github][developer-platform-github]           | todo        |
+| [developer-platform-providers][developer-platform-providers]     | todo        |
 | [developer-platform-vscode][developer-platform-vscode]           | todo        |
 | [developer-platform-vscode-chat][developer-platform-vscode-chat] | todo        |
 | [developer-platform-website][developer-platform-website]         | todo        |
+
+## Packages
+
+| Package                                |                                                                                                                                                                                   |
+| -------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Microsoft.Developer.Abstractions       | ![Microsoft.Developer.Abstractions](https://img.shields.io/endpoint?url=https://msdevnuget.blob.core.windows.net/feed/badges/v/microsoft.developer.abstractions.json)             |
+| Microsoft.Developer.Azure              | ![Microsoft.Developer.Azure](https://img.shields.io/endpoint?url=https://msdevnuget.blob.core.windows.net/feed/badges/v/microsoft.developer.azure.json)                           |
+| Microsoft.Developer.Data.Cosmos        | ![Microsoft.Developer.Data.Cosmos](https://img.shields.io/endpoint?url=https://msdevnuget.blob.core.windows.net/feed/badges/v/microsoft.developer.data.cosmos.json)               |
+| Microsoft.Developer.DurableTasks       | ![Microsoft.Developer.DurableTasks](https://img.shields.io/endpoint?url=https://msdevnuget.blob.core.windows.net/feed/badges/v/microsoft.developer.durabletasks.json)             |
+| Microsoft.Developer.Hosting.AspNetCore | ![Microsoft.Developer.Hosting.AspNetCore](https://img.shields.io/endpoint?url=https://msdevnuget.blob.core.windows.net/feed/badges/v/microsoft.developer.hosting.aspnetcore.json) |
+| Microsoft.Developer.Hosting.Functions  | ![Microsoft.Developer.Hosting.Functions](https://img.shields.io/endpoint?url=https://msdevnuget.blob.core.windows.net/feed/badges/v/microsoft.developer.hosting.functions.json)   |
+| Microsoft.Developer.Hosting            | ![Microsoft.Developer.Hosting](https://img.shields.io/endpoint?url=https://msdevnuget.blob.core.windows.net/feed/badges/v/microsoft.developer.hosting.json)                       |
+| Microsoft.Developer.MSGraph            | ![Microsoft.Developer.MSGraph](https://img.shields.io/endpoint?url=https://msdevnuget.blob.core.windows.net/feed/badges/v/microsoft.developer.msgraph.json)                       |
+| Microsoft.Developer.Providers          | ![Microsoft.Developer.Providers](https://img.shields.io/endpoint?url=https://msdevnuget.blob.core.windows.net/feed/badges/v/microsoft.developer.providers.json)                   |
+| Microsoft.Developer.Serialization.Json | ![Microsoft.Developer.Serialization.Json](https://img.shields.io/endpoint?url=https://msdevnuget.blob.core.windows.net/feed/badges/v/microsoft.developer.serialization.json.json) |
 
 ## Contributing
 
@@ -36,6 +52,7 @@ Any use of third-party trademarks or logos are subject to those third-party's po
 
 [developer-platform-devcenter]: https://github.com/microsoft/developer-platform-devcenter
 [developer-platform-github]: https://github.com/microsoft/developer-platform-github
+[developer-platform-providers]: https://github.com/microsoft/developer-platform-providers
 [developer-platform-vscode]: https://github.com/microsoft/developer-platform-vscode
 [developer-platform-vscode-chat]: https://github.com/microsoft/developer-platform-vscode-chat
 [developer-platform-website]: https://github.com/microsoft/developer-platform-website
