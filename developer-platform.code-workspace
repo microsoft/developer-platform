@@ -1,0 +1,86 @@
+{
+    "folders": [
+        {
+            "name": "platform",
+            "path": "."
+        },
+        {
+            "name": "devcenter",
+            "path": "./../developer-platform-devcenter"
+        },
+        {
+            "name": "github",
+            "path": "./../developer-platform-github"
+        }
+    ],
+    "tasks": {
+        "version": "2.0.0",
+        "presentation": {
+            // "close": true,
+            "showReuseMessage": false,
+        },
+        "tasks": [
+            {
+                "label": "clean sln",
+                "command": "dotnet",
+                "type": "shell",
+                "args": [
+                    "clean",
+                    "${workspaceFolder:platform}/Microsoft.Developer.sln",
+                    "/property:GenerateFullPaths=true",
+                    "/consoleloggerparameters:NoSummary"
+                ],
+                "hide": true,
+                "problemMatcher": "$msCompile",
+                "presentation": {
+                    "group": "build",
+                }
+            },
+            {
+                "label": "build sln",
+                "command": "dotnet",
+                "type": "shell",
+                "args": [
+                    "build",
+                    "${workspaceFolder:platform}/Microsoft.Developer.sln",
+                    "/property:GenerateFullPaths=true",
+                    "/consoleloggerparameters:NoSummary"
+                ],
+                "dependsOn": "clean sln",
+                "problemMatcher": "$msCompile",
+                "presentation": {
+                    "group": "build",
+                }
+            },
+        ]
+    },
+    "launch": {
+        "version": "0.2.0",
+        "configurations": [],
+        "compounds": [
+            {
+                "name": "API + Providers",
+                "configurations": [
+                    "API (coreclr)",
+                    "DevCenter",
+                    "GitHub"
+                ],
+                "preLaunchTask": "build sln",
+                "stopAll": true,
+            }
+        ]
+    },
+    "settings": {
+        "explorer.fileNesting.patterns": {
+            "*.cs": "I${capture}.cs, I${capture}Factory.cs, ${capture}JsonConverter.cs",
+            "*.csproj": "appsettings.json, Dockerfile, host.json, local.settings.json, .gitignore",
+            "Program.cs": "GlobalUsings.cs",
+            "appsettings.json": "appsettings.development.json, appsettings.production.json, appsettings.designtime.json",
+            "README.md": ".gitignore, .gitattributes, LICENSE, SECURITY.md, SUPPORT.md, CODE_OF_CONDUCT.md",
+        },
+        "dotnet.defaultSolution": "Microsoft.Developer.sln",
+        "omnisharp.projectFilesExcludePattern": "**/node_modules/**,**/.git/**,**/bower_components/**,**/.local/**",
+        "debug.internalConsoleOptions": "neverOpen",
+        "dotnet.preferRuntimeFromSDK": true
+    }
+}
