@@ -7,8 +7,4 @@ branches:
     track-merge-target: false # Strategy which will look for tagged merge commits directly off the current branch. For example develop → release/1.0.0 → merge into main and tag 1.0.0. The tag is not on develop, but develop should be version 1.0.0 now.
 ignore:
   sha: []
-major-version-bump-message: '\+(bump|semver):\s?(breaking|major)'
-minor-version-bump-message: '\+(bump|semver):\s?(feature|minor)'
-patch-version-bump-message: '\+(bump|semver):\s?(fix|patch)'
-no-bump-message: '\+(bump|semver):\s?(none|skip)'
 merge-message-formats: {}

@@ -154,7 +154,6 @@ jobs:
       - openapi
 
     env:
-      WORKING_DIRECTORY: ./src
       IMAGE_REGISTRY: ${{ vars.REGISTRY_URL || 'ghcr.io' }}
       IMAGE_REPOSITORY: ${{ vars.REGISTRY_REPOSITORY || github.repository }}
       IMAGE_VERSION: ${{ needs.pack.outputs.version }}

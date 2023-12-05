@@ -9,7 +9,7 @@
     <ContainerVersion>$(Version)</ContainerVersion>
     <ContainerTitle>Microsoft Developer Platform API</ContainerTitle>
     <ContainerDescription>The Microsoft Developer Platform API.</ContainerDescription>
-    <ContainerDocumentationUrl>https://github.com/microsoft/developer-platform/tree/main/src/Microsoft.Developer.Api</ContainerDocumentationUrl>
+    <ContainerDocumentationUrl>https://github.com/microsoft/developer-platform</ContainerDocumentationUrl>
     <ContainerRepository>developer-platform/api</ContainerRepository>
   </PropertyGroup>
 
