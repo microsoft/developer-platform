@@ -1,0 +1,59 @@
+name: Release
+
+on: workflow_call
+
+jobs:
+  release:
+    # only build and push if this is not a pull request
+    if: ${{ github.event_name != 'pull_request' }}
+    runs-on: ubuntu-latest
+
+    env:
+      IMAGE_REGISTRY: ${{ vars.REGISTRY_URL || 'ghcr.io' }}
+      IMAGE_REPOSITORY: ${{ vars.REGISTRY_REPOSITORY || github.repository }}
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Install GitVersion
+        uses: gittools/actions/gitversion/setup@v0.9.15
+        with:
+          versionSpec: '5.12.0'
+
+      - name: Determine Version
+        uses: gittools/actions/gitversion/execute@v0
+        with:
+          useConfigFile: true
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          global-json-file: ./global.json
+
+      - name: Docker Login
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.IMAGE_REGISTRY }}
+          username: ${{ vars.REGISTRY_USERNAME || github.actor }}
+          password: ${{ secrets.REGISTRY_PASSWORD || secrets.GITHUB_TOKEN }}
+
+      - name: Publish API
+        working-directory: ./src/Microsoft.Developer.Api
+        run: dotnet publish --os linux --arch x64 -c Release -p:PublishProfile=DefaultContainer
+
+      - name: Create Release
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const releaseResult = await github.rest.repos.createRelease({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              tag_name: 'v${{ env.GITVERSION_FULLSEMVER }}',
+              name: 'v${{ env.GITVERSION_FULLSEMVER }}',
+              prerelease: true,
+              body: 'prerelease'
+            });
+
+            const release = releaseResult.data;
