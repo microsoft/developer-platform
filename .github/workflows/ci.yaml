@@ -40,6 +40,7 @@ jobs:
           path: test-results/*
 
   pack:
+    if: "!contains(join(github.event.commits.*.message), '+norelease')"
     runs-on: ubuntu-latest
 
     env:
@@ -75,7 +76,7 @@ jobs:
 
       - name: Save Version
         id: version
-        run: echo "::set-output name=version::GITVERSION_FULLSEMVER"
+        run: echo "version=$GITVERSION_FULLSEMVER" >> $GITHUB_OUTPUT
 
       - name: Restore
         run: dotnet restore ./Microsoft.Developer.Packages.slnf --verbosity normal
