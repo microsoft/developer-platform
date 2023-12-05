@@ -52,7 +52,7 @@
                 "-t:OpenApi"
             ],
             "options": {
-                "cwd": "${workspaceFolder}/Microsoft.Developer.Api"
+                "cwd": "${workspaceFolder}/src/Microsoft.Developer.Api"
             },
             "problemMatcher": "$msCompile",
         }
