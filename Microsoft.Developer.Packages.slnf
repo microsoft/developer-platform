@@ -4,6 +4,7 @@
     "projects": [
       "src\\Microsoft.Developer.Abstractions\\Microsoft.Developer.Abstractions.csproj",
       "src\\Microsoft.Developer.Azure\\Microsoft.Developer.Azure.csproj",
+      "src\\Microsoft.Developer.Data.Cosmos\\Microsoft.Developer.Data.Cosmos.csproj",
       "src\\Microsoft.Developer.DurableTasks\\Microsoft.Developer.DurableTasks.csproj",
       "src\\Microsoft.Developer.Hosting.AspNetCore\\Microsoft.Developer.Hosting.AspNetCore.csproj",
       "src\\Microsoft.Developer.Hosting.Functions\\Microsoft.Developer.Hosting.Functions.csproj",

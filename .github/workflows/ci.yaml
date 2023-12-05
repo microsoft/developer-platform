@@ -93,8 +93,7 @@ jobs:
           name: Unsigned
           path: 'artifacts/package/release/*'
 
-  push:
-    name: 'Publish Packages'
+  publish:
     runs-on: ubuntu-latest
     needs: [pack]
 
@@ -145,7 +144,6 @@ jobs:
   release:
     # only build and push if this is not a pull request
     if: ${{ github.event_name != 'pull_request' }}
-    name: Create new Release
     runs-on: ubuntu-latest
 
     needs:
