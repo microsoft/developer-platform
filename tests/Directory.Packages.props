@@ -4,7 +4,7 @@
     <PackageVersion Include="Microsoft.AspNetCore.TestHost" Version="8.0.0" />
     <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.8.0" />
     <PackageVersion Include="Moq" Version="4.20.69" />
-    <PackageVersion Include="xunit" Version="2.6.1" />
+    <PackageVersion Include="xunit" Version="2.6.2" />
     <PackageVersion Include="xunit.runner.visualstudio" Version="2.5.4" />
     <PackageVersion Include="coverlet.collector" Version="6.0.0" />
   </ItemGroup>
