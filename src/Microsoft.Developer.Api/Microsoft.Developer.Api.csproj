@@ -52,6 +52,7 @@
     <Message Text="generating openapi" Importance="high" />
     <Exec Command="dotnet tool restore" />
     <Exec EnvironmentVariables="DOTNET_ENVIRONMENT=DesignTime" Command="dotnet swagger tofile --yaml --output $(MSBuildThisFileDirectory)/../../openapi/openapi.yaml $(OutputPath)$(AssemblyName).dll v1" />
+    <Exec EnvironmentVariables="DOTNET_ENVIRONMENT=DesignTime" Command="dotnet swagger tofile --output $(MSBuildThisFileDirectory)/../../openapi/openapi.json $(OutputPath)$(AssemblyName).dll v1" />
   </Target>
 
 </Project>
