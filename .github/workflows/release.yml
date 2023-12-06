@@ -33,17 +33,34 @@ jobs:
     needs: [version, publish_container, publish_npm]
 
     steps:
+      - uses: actions/checkout@v4
+
+      - name: Assets
+        id: assets
+        run: python ./.github/scripts/release_assets.py
+
       - name: Create Release
         uses: actions/github-script@v7
         with:
           script: |
+            const fs = require('fs');
+
+            const assets = JSON.parse('${{steps.assets.outputs.assets}}');
+
             const releaseResult = await github.rest.repos.createRelease({
               owner: context.repo.owner,
               repo: context.repo.repo,
               tag_name: 'v${{ needs.version.outputs.fullSemVer }}',
               name: 'v${{ needs.version.outputs.fullSemVer }}',
-              prerelease: true,
-              body: 'prerelease'
+              prerelease: false,
             });
 
             const release = releaseResult.data;
+
+            assets.forEach(async a => await github.rest.repos.uploadReleaseAsset({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              release_id: release.id,
+              name: a.name,
+              data: fs.readFileSync(a.path)
+            }));
