@@ -9,6 +9,7 @@ on:
       path:
         type: string
         required: true
+
     secrets:
       NPM_API_KEY:
         required: true
