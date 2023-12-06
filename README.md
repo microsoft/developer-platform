@@ -1,19 +1,29 @@
 # Microsoft Developer Platform
 
+[![developer-platform](https://img.shields.io/github/v/release/microsoft/developer-platform?logo=github)](http://github.com/microsoft/developer-platform/releases)
+
 `// TODO`
 
 ## Repos
 
-| Repo                                                             | Description                                                                   |
-| ---------------------------------------------------------------- | ----------------------------------------------------------------------------- |
-| [developer-platform-devcenter][developer-platform-devcenter]     | The Dev Center provider adds support for [Azure Deployment Environments][ade] |
-| [developer-platform-github][developer-platform-github]           | The GitHub provider(s)                                                        |
-| [developer-platform-providers][developer-platform-providers]     | List of open-source providers as well as some docs and shared tooling         |
-| [developer-platform-vscode][developer-platform-vscode]           | Developer Platform VS Code extension (not started)                            |
-| [developer-platform-vscode-chat][developer-platform-vscode-chat] | Developer Platform [GitHub CoPilot chat agent][copilot-chat] for VS Code      |
-| [developer-platform-website][developer-platform-website]         | Simple react website that imitates a company's internal portal (for testing)  |
+| Repo                                                             | Description                                                              |                                                                                                                                                                                                         |
+| ---------------------------------------------------------------- | ------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [developer-platform-providers][developer-platform-providers]     | List of open-source providers, docs, and shared tooling                  | [![developer-platform-providers](https://img.shields.io/badge/providers-2-e05d44?logo=github)](https://github.com/microsoft/developer-platform-providers)                                               |
+| [developer-platform-github][developer-platform-github]           | The GitHub provider(s)                                                   | [![developer-platform-github](https://img.shields.io/github/v/release/microsoft/developer-platform-github?logo=github)](https://github.com/microsoft/developer-platform-github/releases)                |
+| [developer-platform-devcenter][developer-platform-devcenter]     | The Dev Center [Azure Deployment Environments][ade] provider             | [![developer-platform-devcenter](https://img.shields.io/github/v/release/microsoft/developer-platform-devcenter?logo=github)](https://github.com/microsoft/developer-platform-devcenter/releases)       |
+| [developer-platform-vscode][developer-platform-vscode]           | Developer Platform VS Code extension (not started)                       | [![developer-platform-vscode](https://img.shields.io/github/v/release/microsoft/developer-platform-vscode?logo=github)](https://github.com/microsoft/developer-platform-vscode/releases)                |
+| [developer-platform-vscode-chat][developer-platform-vscode-chat] | Developer Platform [GitHub CoPilot chat agent][copilot-chat] for VS Code | [![developer-platform-vscode-chat](https://img.shields.io/github/v/release/microsoft/developer-platform-vscode-chat?logo=github)](https://github.com/microsoft/developer-platform-vscode-chat/releases) |
+| [developer-platform-website][developer-platform-website]         | React website imitating a company's portal (for testing)                 | [![developer-platform-website](https://img.shields.io/github/v/release/microsoft/developer-platform-website?logo=github)](https://github.com/microsoft/developer-platform-website/releases)             |
 
 ## Packages
+
+### TypeScript
+
+| Package                                                                                    |                                                                                                                                                            |
+| ------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [@developer-platform/entities](https://www.npmjs.com/package/@developer-platform/entities) | [![@developer-platform/entities](https://img.shields.io/npm/v/%40developer-platform/entities)](https://www.npmjs.com/package/@developer-platform/entities) |
+
+### .NET
 
 | Package                                |                                                                                                                                                                                   |
 | -------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
