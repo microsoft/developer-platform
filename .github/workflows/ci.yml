@@ -39,97 +39,18 @@ jobs:
           name: Test Results (${{ matrix.configuration }})
           path: test-results/*
 
-  pack:
-    if: "!contains(join(github.event.commits.*.message), '+norelease')"
-    runs-on: ubuntu-latest
-
-    env:
-      Configuration: Release
-
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-
-      - name: Install GitVersion
-        uses: gittools/actions/gitversion/setup@v0.9.15
-        with:
-          versionSpec: '5.12.0'
-
-      - name: Determine Version
-        uses: gittools/actions/gitversion/execute@v0
-        with:
-          useConfigFile: true
-
-      - name: Setup .NET
-        uses: actions/setup-dotnet@v4
-        with:
-          global-json-file: ./global.json
-
-      - name: Restore
-        run: dotnet restore ./Microsoft.Developer.Packages.slnf --verbosity normal
-
-      - name: Build
-        run: dotnet build ./Microsoft.Developer.Packages.slnf --no-restore --verbosity normal
-
-      - name: Pack
-        run: dotnet pack ./Microsoft.Developer.Packages.slnf --no-build
-
-      - name: Upload
-        uses: actions/upload-artifact@v3
-        with:
-          name: Unsigned
-          path: 'artifacts/package/release/*'
-
-  publish:
-    runs-on: ubuntu-latest
-    needs: [pack]
-
-    steps:
-      - name: Download Packages
-        uses: actions/download-artifact@v3
-        with:
-          name: Unsigned
-          path: '${{ github.workspace }}/packages'
-
-      - name: Publish Packages
-        env:
-          SLEET_FEED_TYPE: azure
-          SLEET_FEED_CONTAINER: feed
-          SLEET_FEED_CONNECTIONSTRING: ${{ secrets.SLEET_CONNECTIONSTRING }}
-        run: |
-          cd $GITHUB_WORKSPACE/packages
-          dotnet tool install -g sleet
-          sleet push . --skip-existing
-
   openapi:
-    runs-on: ubuntu-latest
+    uses: ./.github/workflows/openapi.yml
 
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Setup .NET
-        uses: actions/setup-dotnet@v4
-        with:
-          global-json-file: ./global.json
-
-      - name: OpenAPI
-        working-directory: ./src/Microsoft.Developer.Api
-        run: dotnet build /t:openapi
-
-      - name: Check OpenAPI Changes
-        id: diff
-        run: |
-          if [ "$(git diff --ignore-space-at-eol --text openapi/ | wc -l)" -gt "0" ]; then
-            echo "Detected uncommitted changes after build. See status below:"
-            git diff --ignore-space-at-eol --text openapi/
-            exit 1
-          fi
+  packages:
+    if: "!contains(join(github.event.commits.*.message), '+norelease')"
+    uses: ./.github/workflows/packages.yml
+    secrets: inherit
 
   release:
     # only build and push if this is not a pull request
     if: ${{ github.event_name != 'pull_request' }}
     uses: ./.github/workflows/release.yml
 
-    needs: [build, pack, openapi]
+    needs: [build, packages, openapi]
     secrets: inherit

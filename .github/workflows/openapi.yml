@@ -1,0 +1,28 @@
+name: OpenAPI
+
+on: workflow_call
+
+jobs:
+  openapi:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          global-json-file: ./global.json
+
+      - name: OpenAPI
+        working-directory: ./src/Microsoft.Developer.Api
+        run: dotnet build /t:openapi
+
+      - name: Check OpenAPI Changes
+        id: diff
+        run: |
+          if [ "$(git diff --ignore-space-at-eol --text openapi/ | wc -l)" -gt "0" ]; then
+            echo "Detected uncommitted changes after build. See status below:"
+            git diff --ignore-space-at-eol --text openapi/
+            exit 1
+          fi
