@@ -29,7 +29,7 @@ jobs:
   openapi:
     uses: ./.github/workflows/openapi.yml
 
-  release:
-    uses: ./.github/workflows/release.yml
-    needs: [build, package, openapi]
-    secrets: inherit
+  # release:
+  #   uses: ./.github/workflows/release.yml
+  #   needs: [build, package, openapi]
+  #   secrets: inherit

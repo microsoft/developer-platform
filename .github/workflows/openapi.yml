@@ -3,7 +3,7 @@ name: OpenAPI
 on: workflow_call
 
 jobs:
-  check:
+  schema:
     runs-on: ubuntu-latest
 
     steps:
@@ -24,5 +24,28 @@ jobs:
           if [ "$(git diff --ignore-space-at-eol --text openapi/ | wc -l)" -gt "0" ]; then
             echo "Detected uncommitted changes after build. See status below:"
             git diff --ignore-space-at-eol --text openapi/
+            exit 1
+          fi
+
+  typescript:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: OpenAPI TypeScript
+        working-directory: sdks/typescript/entities
+        run: npm run openapi
+
+      - name: Check for Changes
+        run: |
+          if [ "$(git diff --ignore-space-at-eol --text sdks/typescript/entities/src/openapi.ts | wc -l)" -gt "0" ]; then
+            echo "Detected uncommitted changes after build. See status below:"
+            git diff --ignore-space-at-eol --text sdks/typescript/entities/src/openapi.ts
             exit 1
           fi
