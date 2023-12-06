@@ -3,21 +3,24 @@
  * Do not make direct changes to the file.
  */
 
+
 export interface paths {
-  '/entities': {
-    get: operations['GetEntities'];
-    post: operations['Create'];
+  "/entities": {
+    get: operations["GetEntities"];
+    post: operations["Create"];
   };
-  '/status/{instanceId}': {
-    get: operations['GetStatus'];
+  "/status/{instanceId}": {
+    get: operations["GetStatus"];
   };
-  '/entities/{kind}': {
-    get: operations['GetEntitiesByKind'];
+  "/entities/{kind}": {
+    get: operations["GetEntitiesByKind"];
   };
-  '/entities/{kind}/{namespace}/{name}': {
-    get: operations['GetEntity'];
+  "/entities/{kind}/{namespace}/{name}": {
+    get: operations["GetEntity"];
   };
 }
+
+export type webhooks = Record<string, never>;
 
 export interface components {
   schemas: {
@@ -36,12 +39,12 @@ export interface components {
        * @example kind
        */
       kind: string;
-      metadata: components['schemas']['Metadata'];
+      metadata: components["schemas"]["Metadata"];
       /** @description The specification data describing the entity itself. */
-      spec: components['schemas']['Spec'] | components['schemas']['TemplateSpec'] | components['schemas']['UserSpec'];
-      status?: components['schemas']['Status'];
+      spec: components["schemas"]["Spec"] | components["schemas"]["TemplateSpec"] | components["schemas"]["UserSpec"];
+      status?: components["schemas"]["Status"];
       /** @description The relations that this entity has with other entities. */
-      relations?: components['schemas']['Relation'][] | null;
+      relations?: components["schemas"]["Relation"][] | null;
     };
     EntityPlan: {
       /**
@@ -146,7 +149,7 @@ export interface components {
         [key: string]: string;
       } | null;
       /** @description A list of external hyperlinks related to the entity. */
-      links?: components['schemas']['Link'][] | null;
+      links?: components["schemas"]["Link"][] | null;
       /** @description A list of single-value tags for the entity. */
       tags?: string[] | null;
     };
@@ -154,7 +157,7 @@ export interface components {
     Relation: {
       /** @description The type of relation. */
       type: string;
-      targetRef: components['schemas']['EntityRef'] | string;
+      targetRef: components["schemas"]["EntityRef"] | string;
     };
     /** @description The specification data describing the entity itself. */
     Spec: Record<string, never>;
@@ -165,7 +168,7 @@ export interface components {
        * @description A reference by name to a template.
        * @example template:[{namespace}/]{name}
        */
-      templateRef: components['schemas']['EntityRef'] | string;
+      templateRef: components["schemas"]["EntityRef"] | string;
       /** @description The ID of the provider of the template. */
       provider: string;
       /** @description The input JSON to the template. */
@@ -176,16 +179,16 @@ export interface components {
        * @description References to the entities created.
        * @example [repo:[{namespace}/]{name}]
        */
-      entities: components['schemas']['EntityRef'][];
+      entities: components["schemas"]["EntityRef"][];
     };
     /** @description The specification data describing the template. */
-    TemplateSpec: {
+    TemplateSpec: ({
       /** @description A JSON Schema that defines user inputs for a template. */
       inputJsonSchema?: string | null;
       inputUiSchema?: string | null;
       /** @description Details of the entities that the template creates. */
-      creates?: components['schemas']['EntityPlan'][] | null;
-    } & components['schemas']['Spec'];
+      creates?: components["schemas"]["EntityPlan"][] | null;
+    }) & components["schemas"]["Spec"];
     /** @description The profile of the user. */
     UserProfile: {
       /**
@@ -205,13 +208,13 @@ export interface components {
      * @description The role of the user.
      * @enum {string}
      */
-    UserRole: 'None' | 'Member' | 'Admin' | 'Owner' | 'Provider';
+    UserRole: "None" | "Member" | "Admin" | "Owner" | "Provider";
     /** @description The specification data describing the user. */
-    UserSpec: {
-      role?: components['schemas']['UserRole'];
-      profile?: components['schemas']['UserProfile'];
-      memberOf?: (components['schemas']['EntityRef'] | string)[] | null;
-    } & components['schemas']['Spec'];
+    UserSpec: ({
+      role?: components["schemas"]["UserRole"];
+      profile?: components["schemas"]["UserProfile"];
+      memberOf?: ((components["schemas"]["EntityRef"] | string)[]) | null;
+    }) & components["schemas"]["Spec"];
   };
   responses: never;
   parameters: never;
@@ -225,13 +228,14 @@ export type $defs = Record<string, never>;
 export type external = Record<string, never>;
 
 export interface operations {
+
   GetEntities: {
     responses: {
       /** @description OK */
       200: {
         content: {
-          'application/json': components['schemas']['Entity'][];
-          'application/yaml': components['schemas']['Entity'][];
+          "application/json": components["schemas"]["Entity"][];
+          "application/yaml": components["schemas"]["Entity"][];
         };
       };
     };
@@ -239,14 +243,14 @@ export interface operations {
   Create: {
     requestBody?: {
       content: {
-        'application/json': components['schemas']['TemplateRequest'];
+        "application/json": components["schemas"]["TemplateRequest"];
       };
     };
     responses: {
       /** @description Accepted */
       202: {
         content: {
-          'application/json': components['schemas']['DurableTaskResult'];
+          "application/json": components["schemas"]["DurableTaskResult"];
         };
       };
     };
@@ -261,13 +265,13 @@ export interface operations {
       /** @description OK */
       200: {
         content: {
-          'application/json': components['schemas']['TemplateResponse'];
+          "application/json": components["schemas"]["TemplateResponse"];
         };
       };
       /** @description Accepted */
       202: {
         content: {
-          'application/json': components['schemas']['DurableTaskResult'];
+          "application/json": components["schemas"]["DurableTaskResult"];
         };
       };
       /** @description Not Found */
@@ -290,8 +294,8 @@ export interface operations {
       /** @description OK */
       200: {
         content: {
-          'application/json': components['schemas']['Entity'][];
-          'application/yaml': components['schemas']['Entity'][];
+          "application/json": components["schemas"]["Entity"][];
+          "application/yaml": components["schemas"]["Entity"][];
         };
       };
     };
@@ -308,8 +312,8 @@ export interface operations {
       /** @description OK */
       200: {
         content: {
-          'application/json': components['schemas']['Entity'];
-          'application/yaml': components['schemas']['Entity'];
+          "application/json": components["schemas"]["Entity"];
+          "application/yaml": components["schemas"]["Entity"];
         };
       };
       /** @description Not Found */
