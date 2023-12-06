@@ -34,3 +34,44 @@ jobs:
         with:
           name: Test Results (${{ matrix.configuration }})
           path: test-results/*
+
+  pack:
+    runs-on: ubuntu-latest
+
+    env:
+      Configuration: Release
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Install GitVersion
+        uses: gittools/actions/gitversion/setup@v0.9.15
+        with:
+          versionSpec: '5.12.0'
+
+      - name: Determine Version
+        uses: gittools/actions/gitversion/execute@v0
+        with:
+          useConfigFile: true
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          global-json-file: ./global.json
+
+      - name: Restore
+        run: dotnet restore ./Microsoft.Developer.Packages.slnf --verbosity normal
+
+      - name: Build
+        run: dotnet build ./Microsoft.Developer.Packages.slnf --no-restore --verbosity normal
+
+      - name: Pack
+        run: dotnet pack ./Microsoft.Developer.Packages.slnf --no-build
+
+      - name: Upload
+        uses: actions/upload-artifact@v3
+        with:
+          name: Unsigned
+          path: 'artifacts/package/release/*'

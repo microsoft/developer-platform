@@ -23,17 +23,14 @@ jobs:
   build:
     uses: ./.github/workflows/build.yml
 
+  package:
+    uses: ./.github/workflows/package.yml
+
   openapi:
     uses: ./.github/workflows/openapi.yml
 
-  packages:
-    uses: ./.github/workflows/packages.yml
-    secrets: inherit
-
   release:
-    # only build and push if this is not a pull request
     if: ${{ github.event_name != 'pull_request' }}
     uses: ./.github/workflows/release.yml
-
-    needs: [build, packages, openapi]
+    needs: [build, package, openapi]
     secrets: inherit

@@ -1,0 +1,50 @@
+name: Publish NPM
+
+on:
+  workflow_call:
+    inputs:
+      version:
+        type: string
+        required: true
+      path:
+        type: string
+        required: true
+    secrets:
+      NPM_API_KEY:
+        required: true
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: ${{ inputs.path }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          registry-url: https://registry.npmjs.org/ # Needed for auth
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_API_KEY }}
+
+      - name: Config
+        run: |
+          npm config set commit-hooks false
+          npm config set git-tag-version false
+
+      - name: Version
+        run: npm version ${{ inputs.version }}
+
+      - name: Install
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+
+      - name: Build
+        run: npm publish

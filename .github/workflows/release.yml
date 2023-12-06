@@ -3,44 +3,36 @@ name: Release
 on: workflow_call
 
 jobs:
-  release:
-    runs-on: ubuntu-latest
+  version:
+    uses: ./.github/workflows/version.yml
 
-    env:
-      IMAGE_REGISTRY: ${{ vars.REGISTRY_URL || 'ghcr.io' }}
-      IMAGE_REPOSITORY: ${{ vars.REGISTRY_REPOSITORY || github.repository }}
+  publish_nuget:
+    uses: ./.github/workflows/publish_nuget.yml
+    secrets:
+      SLEET_CONNECTIONSTRING: ${{ secrets.SLEET_CONNECTIONSTRING }}
+
+  publish_npm:
+    if: ${{ github.event_name != 'pull_request' }}
+    uses: ./.github/workflows/publish_npm.yml
+    needs: version
+    with:
+      path: sdks/typescript/entities
+      version: ${{ needs.version.outputs.fullSemVer }}
+    secrets:
+      NPM_API_KEY: ${{ secrets.NPM_API_KEY }}
+
+  publish_container:
+    if: ${{ github.event_name != 'pull_request' }}
+    uses: ./.github/workflows/publish_image.yml
+    secrets:
+      REGISTRY_PASSWORD: ${{ secrets.REGISTRY_PASSWORD || secrets.GITHUB_TOKEN }}
+
+  release:
+    if: ${{ github.event_name != 'pull_request' }}
+    runs-on: ubuntu-latest
+    needs: [version, publish_container, publish_npm]
 
     steps:
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-
-      - name: Install GitVersion
-        uses: gittools/actions/gitversion/setup@v0.9.15
-        with:
-          versionSpec: '5.12.0'
-
-      - name: Determine Version
-        uses: gittools/actions/gitversion/execute@v0
-        with:
-          useConfigFile: true
-
-      - name: Setup .NET
-        uses: actions/setup-dotnet@v4
-        with:
-          global-json-file: ./global.json
-
-      - name: Docker Login
-        uses: docker/login-action@v3
-        with:
-          registry: ${{ env.IMAGE_REGISTRY }}
-          username: ${{ vars.REGISTRY_USERNAME || github.actor }}
-          password: ${{ secrets.REGISTRY_PASSWORD || secrets.GITHUB_TOKEN }}
-
-      - name: Publish API
-        working-directory: ./src/Microsoft.Developer.Api
-        run: dotnet publish --os linux --arch x64 -c Release -p:PublishProfile=DefaultContainer
-
       - name: Create Release
         uses: actions/github-script@v7
         with:
@@ -48,8 +40,8 @@ jobs:
             const releaseResult = await github.rest.repos.createRelease({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              tag_name: 'v${{ env.GITVERSION_FULLSEMVER }}',
-              name: 'v${{ env.GITVERSION_FULLSEMVER }}',
+              tag_name: 'v${{ needs.version.outputs.fullSemVer }}',
+              name: 'v${{ needs.version.outputs.fullSemVer }}',
               prerelease: true,
               body: 'prerelease'
             });

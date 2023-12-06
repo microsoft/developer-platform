@@ -1,0 +1,123 @@
+name: Version
+
+on:
+  workflow_call:
+    outputs:
+      major:
+        value: ${{ jobs.version.outputs.major }}
+      minor:
+        value: ${{ jobs.version.outputs.minor }}
+      patch:
+        value: ${{ jobs.version.outputs.patch }}
+      preReleaseTag:
+        value: ${{ jobs.version.outputs.preReleaseTag }}
+      preReleaseTagWithDash:
+        value: ${{ jobs.version.outputs.preReleaseTagWithDash }}
+      preReleaseLabel:
+        value: ${{ jobs.version.outputs.preReleaseLabel }}
+      preReleaseNumber:
+        value: ${{ jobs.version.outputs.preReleaseNumber }}
+      weightedPreReleaseNumber:
+        value: ${{ jobs.version.outputs.weightedPreReleaseNumber }}
+      buildMetaData:
+        value: ${{ jobs.version.outputs.buildMetaData }}
+      buildMetaDataPadded:
+        value: ${{ jobs.version.outputs.buildMetaDataPadded }}
+      fullBuildMetaData:
+        value: ${{ jobs.version.outputs.fullBuildMetaData }}
+      majorMinorPatch:
+        value: ${{ jobs.version.outputs.majorMinorPatch }}
+      semVer:
+        value: ${{ jobs.version.outputs.semVer }}
+      legacySemVer:
+        value: ${{ jobs.version.outputs.legacySemVer }}
+      legacySemVerPadded:
+        value: ${{ jobs.version.outputs.legacySemVerPadded }}
+      assemblySemVer:
+        value: ${{ jobs.version.outputs.assemblySemVer }}
+      assemblySemFileVer:
+        value: ${{ jobs.version.outputs.assemblySemFileVer }}
+      fullSemVer:
+        value: ${{ jobs.version.outputs.fullSemVer }}
+      informationalVersion:
+        value: ${{ jobs.version.outputs.informationalVersion }}
+      branchName:
+        value: ${{ jobs.version.outputs.branchName }}
+      escapedBranchName:
+        value: ${{ jobs.version.outputs.escapedBranchName }}
+      sha:
+        value: ${{ jobs.version.outputs.sha }}
+      shortSha:
+        value: ${{ jobs.version.outputs.shortSha }}
+      nuGetVersionV2:
+        value: ${{ jobs.version.outputs.nuGetVersionV2 }}
+      nuGetVersion:
+        value: ${{ jobs.version.outputs.nuGetVersion }}
+      nuGetPreReleaseTagV2:
+        value: ${{ jobs.version.outputs.nuGetPreReleaseTagV2 }}
+      nuGetPreReleaseTag:
+        value: ${{ jobs.version.outputs.nuGetPreReleaseTag }}
+      versionSourceSha:
+        value: ${{ jobs.version.outputs.versionSourceSha }}
+      commitsSinceVersionSource:
+        value: ${{ jobs.version.outputs.commitsSinceVersionSource }}
+      commitsSinceVersionSourcePadded:
+        value: ${{ jobs.version.outputs.commitsSinceVersionSourcePadded }}
+      uncommittedChanges:
+        value: ${{ jobs.version.outputs.uncommittedChanges }}
+      commitDate:
+        value: ${{ jobs.version.outputs.commitDate }}
+
+jobs:
+  version:
+    runs-on: ubuntu-latest
+
+    outputs:
+      major: ${{ steps.version.outputs.major }}
+      minor: ${{ steps.version.outputs.minor }}
+      patch: ${{ steps.version.outputs.patch }}
+      preReleaseTag: ${{ steps.version.outputs.preReleaseTag }}
+      preReleaseTagWithDash: ${{ steps.version.outputs.preReleaseTagWithDash }}
+      preReleaseLabel: ${{ steps.version.outputs.preReleaseLabel }}
+      preReleaseNumber: ${{ steps.version.outputs.preReleaseNumber }}
+      weightedPreReleaseNumber: ${{ steps.version.outputs.weightedPreReleaseNumber }}
+      buildMetaData: ${{ steps.version.outputs.buildMetaData }}
+      buildMetaDataPadded: ${{ steps.version.outputs.buildMetaDataPadded }}
+      fullBuildMetaData: ${{ steps.version.outputs.fullBuildMetaData }}
+      majorMinorPatch: ${{ steps.version.outputs.majorMinorPatch }}
+      semVer: ${{ steps.version.outputs.semVer }}
+      legacySemVer: ${{ steps.version.outputs.legacySemVer }}
+      legacySemVerPadded: ${{ steps.version.outputs.legacySemVerPadded }}
+      assemblySemVer: ${{ steps.version.outputs.assemblySemVer }}
+      assemblySemFileVer: ${{ steps.version.outputs.assemblySemFileVer }}
+      fullSemVer: ${{ steps.version.outputs.fullSemVer }}
+      informationalVersion: ${{ steps.version.outputs.informationalVersion }}
+      branchName: ${{ steps.version.outputs.branchName }}
+      escapedBranchName: ${{ steps.version.outputs.escapedBranchName }}
+      sha: ${{ steps.version.outputs.sha }}
+      shortSha: ${{ steps.version.outputs.shortSha }}
+      nuGetVersionV2: ${{ steps.version.outputs.nuGetVersionV2 }}
+      nuGetVersion: ${{ steps.version.outputs.nuGetVersion }}
+      nuGetPreReleaseTagV2: ${{ steps.version.outputs.nuGetPreReleaseTagV2 }}
+      nuGetPreReleaseTag: ${{ steps.version.outputs.nuGetPreReleaseTag }}
+      versionSourceSha: ${{ steps.version.outputs.versionSourceSha }}
+      commitsSinceVersionSource: ${{ steps.version.outputs.commitsSinceVersionSource }}
+      commitsSinceVersionSourcePadded: ${{ steps.version.outputs.commitsSinceVersionSourcePadded }}
+      uncommittedChanges: ${{ steps.version.outputs.uncommittedChanges }}
+      commitDate: ${{ steps.version.outputs.commitDate }}
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Install GitVersion
+        uses: gittools/actions/gitversion/setup@v0.9.15
+        with:
+          versionSpec: '5.12.0'
+
+      - name: Determine Version
+        id: version
+        uses: gittools/actions/gitversion/execute@v0
+        with:
+          useConfigFile: true
