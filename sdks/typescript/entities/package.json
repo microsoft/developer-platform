@@ -1,6 +1,6 @@
 {
   "name": "@developer-platform/entities",
-  "version": "0.0.3",
+  "version": "0.0.0",
   "description": "Entity types for the Developer Platform",
   "main": "dist/index.js",
   "types": "dist/types.d.ts",
