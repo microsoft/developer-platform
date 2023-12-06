@@ -3,47 +3,30 @@ name: CI
 on:
   push:
     branches: [main]
+    paths-ignore:
+      - '.vscode/**'
+      - 'docs/**'
+      - 'tools/**'
+      - '**/*.md'
+      - '*.code-workspace'
+
   pull_request:
     branches: [main]
+    paths-ignore:
+      - '.vscode/**'
+      - 'docs/**'
+      - 'tools/**'
+      - '**/*.md'
+      - '*.code-workspace'
 
 jobs:
   build:
-    runs-on: ubuntu-latest
-
-    strategy:
-      matrix:
-        configuration: [debug, release]
-      fail-fast: false
-
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Setup .NET
-        uses: actions/setup-dotnet@v4
-        with:
-          global-json-file: ./global.json
-
-      - name: Restore
-        run: dotnet restore Microsoft.Developer.sln --verbosity normal
-
-      - name: Build
-        run: dotnet build Microsoft.Developer.sln --configuration ${{ matrix.configuration }} --no-restore --verbosity normal
-
-      - name: Test
-        run: dotnet test Microsoft.Developer.sln --configuration ${{ matrix.configuration }} --no-restore --verbosity normal --logger trx --results-directory test-results/
-
-      - name: Upload Test Results
-        if: always()
-        uses: actions/upload-artifact@v3
-        with:
-          name: Test Results (${{ matrix.configuration }})
-          path: test-results/*
+    uses: ./.github/workflows/build.yml
 
   openapi:
     uses: ./.github/workflows/openapi.yml
 
   packages:
-    if: "!contains(join(github.event.commits.*.message), '+norelease')"
     uses: ./.github/workflows/packages.yml
     secrets: inherit
 

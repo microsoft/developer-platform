@@ -55,15 +55,15 @@ jobs:
           name: Unsigned
           path: '${{ github.workspace }}/packages'
 
-      - name: Publish Packages
-        # use nuget.org for release packages
-        if: ${{ github.event_name != 'pull_request' }}
-        working-directory: ${{ github.workspace }}/packages
-        run: dotnet nuget push **/*.nupkg --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json
+      # - name: Publish Packages
+      #   # use nuget.org for release packages
+      #   if: ${{ github.event_name != 'pull_request' }}
+      #   working-directory: ${{ github.workspace }}/packages
+      #   run: dotnet nuget push **/*.nupkg --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json
 
       - name: Publish Packages
         # use sleet_feed for PR packages
-        if: ${{ github.event_name == 'pull_request' }}
+        # if: ${{ github.event_name == 'pull_request' }}
         env:
           SLEET_FEED_TYPE: azure
           SLEET_FEED_CONTAINER: feed

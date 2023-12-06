@@ -4,8 +4,6 @@ on: workflow_call
 
 jobs:
   release:
-    # only build and push if this is not a pull request
-    if: ${{ github.event_name != 'pull_request' }}
     runs-on: ubuntu-latest
 
     env:

@@ -4,14 +4,14 @@
 
 ## Repos
 
-| Repo                                                             | Description |
-| ---------------------------------------------------------------- | ----------- |
-| [developer-platform-devcenter][developer-platform-devcenter]     | todo        |
-| [developer-platform-github][developer-platform-github]           | todo        |
-| [developer-platform-providers][developer-platform-providers]     | todo        |
-| [developer-platform-vscode][developer-platform-vscode]           | todo        |
-| [developer-platform-vscode-chat][developer-platform-vscode-chat] | todo        |
-| [developer-platform-website][developer-platform-website]         | todo        |
+| Repo                                                             | Description                                                                   |
+| ---------------------------------------------------------------- | ----------------------------------------------------------------------------- |
+| [developer-platform-devcenter][developer-platform-devcenter]     | The Dev Center provider adds support for [Azure Deployment Environments][ade] |
+| [developer-platform-github][developer-platform-github]           | The GitHub provider(s)                                                        |
+| [developer-platform-providers][developer-platform-providers]     | List of open-source providers as well as some docs and shared tooling         |
+| [developer-platform-vscode][developer-platform-vscode]           | Developer Platform VS Code extension (not started)                            |
+| [developer-platform-vscode-chat][developer-platform-vscode-chat] | Developer Platform [GitHub CoPilot chat agent][copilot-chat] for VS Code      |
+| [developer-platform-website][developer-platform-website]         | Simple react website that imitates a company's internal portal (for testing)  |
 
 ## Packages
 
@@ -56,3 +56,5 @@ Any use of third-party trademarks or logos are subject to those third-party's po
 [developer-platform-vscode]: https://github.com/microsoft/developer-platform-vscode
 [developer-platform-vscode-chat]: https://github.com/microsoft/developer-platform-vscode-chat
 [developer-platform-website]: https://github.com/microsoft/developer-platform-website
+[ade]: https://azure.microsoft.com/en-us/products/deployment-environments
+[copilot-chat]: https://code.visualstudio.com/docs/editor/github-copilot#_agents-and-slash-commands

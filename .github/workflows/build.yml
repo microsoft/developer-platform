@@ -1,0 +1,36 @@
+name: Build
+
+on: workflow_call
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        configuration: [debug, release]
+      fail-fast: false
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          global-json-file: ./global.json
+
+      - name: Restore
+        run: dotnet restore Microsoft.Developer.sln --verbosity normal
+
+      - name: Build
+        run: dotnet build Microsoft.Developer.sln --configuration ${{ matrix.configuration }} --no-restore --verbosity normal
+
+      - name: Test
+        run: dotnet test Microsoft.Developer.sln --configuration ${{ matrix.configuration }} --no-restore --verbosity normal --logger trx --results-directory test-results/
+
+      - name: Upload Test Results
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: Test Results (${{ matrix.configuration }})
+          path: test-results/*
