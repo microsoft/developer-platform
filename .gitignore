@@ -415,7 +415,7 @@ local.settings.json
 
 # .env.development
 
-sdks/**
+sdks/typescript/**/dist
 schemas/**
 
 **/*.pem

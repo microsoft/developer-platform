@@ -3,7 +3,7 @@ name: Package
 on: workflow_call
 
 jobs:
-  package:
+  nuget:
     runs-on: ubuntu-latest
 
     env:

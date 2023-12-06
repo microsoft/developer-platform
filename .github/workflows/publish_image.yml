@@ -2,17 +2,26 @@ name: Publish Container
 
 on:
   workflow_call:
+    inputs:
+      name:
+        type: string
+        description: 'The name of the imag to publish'
+        default: 'api'
+      path:
+        type: string
+        description: 'The path to the Dockerfile'
+        default: './src/Microsoft.Developer.Api'
     secrets:
       REGISTRY_PASSWORD:
         required: false
 
 jobs:
-  publish:
+  image:
     runs-on: ubuntu-latest
 
     env:
       IMAGE_REGISTRY: ${{ vars.REGISTRY_URL || 'ghcr.io' }}
-      IMAGE_REPOSITORY: ${{ vars.REGISTRY_REPOSITORY || github.repository }}
+      IMAGE_REPOSITORY: ${{ vars.REGISTRY_REPOSITORY || github.repository }}/${{ inputs.name}}
 
     steps:
       - uses: actions/checkout@v4
@@ -43,5 +52,5 @@ jobs:
           password: ${{ secrets.REGISTRY_PASSWORD || secrets.GITHUB_TOKEN }}
 
       - name: Publish API
-        working-directory: ./src/Microsoft.Developer.Api
+        working-directory: ${{ inputs.path }}
         run: dotnet publish --os linux --arch x64 -c Release -p:PublishProfile=DefaultContainer

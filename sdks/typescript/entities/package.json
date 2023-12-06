@@ -1,0 +1,27 @@
+{
+  "name": "@developer-platform/entities",
+  "version": "0.0.3",
+  "description": "Entity types for the Developer Platform",
+  "main": "dist/index.js",
+  "types": "dist/types.d.ts",
+  "scripts": {
+    "build": "npm run openapi && npm run compile",
+    "compile": " tsc -b .",
+    "openapi": "npx openapi-typescript ../../../openapi/openapi.yaml -o src/openapi.ts",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/microsoft/developer-platform.git"
+  },
+  "author": "Microsoft",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/microsoft/developer-platform/issues"
+  },
+  "homepage": "https://github.com/microsoft/developer-platform#readme",
+  "devDependencies": {
+    "openapi-typescript": "^6.7.2",
+    "typescript": "^5.3.2"
+  }
+}

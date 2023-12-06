@@ -10,7 +10,8 @@
     <ContainerTitle>Microsoft Developer Platform API</ContainerTitle>
     <ContainerDescription>The Microsoft Developer Platform API.</ContainerDescription>
     <ContainerDocumentationUrl>https://github.com/microsoft/developer-platform</ContainerDocumentationUrl>
-    <ContainerRepository>developer-platform/api</ContainerRepository>
+    <ContainerRepository>$(IMAGE_REPOSITORY)</ContainerRepository>
+    <ContainerRepository Condition=" '$(ContainerRepository)' == '' ">developer-platform/api</ContainerRepository>
   </PropertyGroup>
 
   <ItemGroup>

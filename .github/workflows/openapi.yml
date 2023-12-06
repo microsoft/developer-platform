@@ -3,7 +3,7 @@ name: OpenAPI
 on: workflow_call
 
 jobs:
-  openapi:
+  check:
     runs-on: ubuntu-latest
 
     steps:

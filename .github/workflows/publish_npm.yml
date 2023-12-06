@@ -15,7 +15,7 @@ on:
         required: true
 
 jobs:
-  publish:
+  npm:
     runs-on: ubuntu-latest
 
     defaults:
