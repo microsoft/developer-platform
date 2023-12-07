@@ -8,7 +8,9 @@ on:
       - 'docs/**'
       - 'tools/**'
       - '**/*.md'
+      - '**/*.yml'
       - '*.code-workspace'
+      - '.gitignore'
 
   pull_request:
     branches: [main]
@@ -17,7 +19,9 @@ on:
       - 'docs/**'
       - 'tools/**'
       - '**/*.md'
+      - '**/*.yml'
       - '*.code-workspace'
+      - '.gitignore'
 
 jobs:
   build:
