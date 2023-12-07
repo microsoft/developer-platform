@@ -373,3 +373,4 @@ internal static class SwaggerExtensions
         }
     }
 }
+
