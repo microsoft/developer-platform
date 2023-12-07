@@ -34,7 +34,6 @@ jobs:
           versionSpec: '5.12.0'
 
       - name: Determine Version
-        id: gitversion
         uses: gittools/actions/gitversion/execute@v0
         with:
           useConfigFile: true

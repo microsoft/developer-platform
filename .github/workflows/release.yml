@@ -52,6 +52,7 @@ jobs:
               repo: context.repo.repo,
               tag_name: 'v${{ needs.version.outputs.fullSemVer }}',
               name: 'v${{ needs.version.outputs.fullSemVer }}',
+              generate_release_notes: true,
               prerelease: false,
             });
 
