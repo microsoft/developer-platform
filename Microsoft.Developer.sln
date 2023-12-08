@@ -29,7 +29,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "config", "config", "{8CC8F0
 		Directory.Build.targets = Directory.Build.targets
 		Directory.Packages.props = Directory.Packages.props
 		global.json = global.json
-		src\version.txt = src\version.txt
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microsoft.Developer.Abstractions.Tests", "tests\Microsoft.Developer.Abstractions.Tests\Microsoft.Developer.Abstractions.Tests.csproj", "{B1B53925-C6C4-4FFD-AEE3-4F618894541D}"

@@ -2,7 +2,7 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "API (coreclr)",
+            "name": "API",
             "type": "coreclr",
             "request": "launch",
             "program": "${workspaceFolder}/artifacts/bin/Microsoft.Developer.Api/debug/Microsoft.Developer.Api.dll",
@@ -15,17 +15,7 @@
             "presentation": {
                 // "hidden": true,
             },
-        },
-        {
-            "name": "API",
-            "type": "dotnet",
-            "request": "launch",
-            "projectPath": "${workspaceFolder}/src/Microsoft.Developer.Api/Microsoft.Developer.Api.csproj",
-            "internalConsoleOptions": "openOnSessionStart",
-            "launchConfigurationId": "TargetFramework=;https",
-            "presentation": {
-                "hidden": true,
-            },
+            "preLaunchTask": "build api"
         }
     ]
 }

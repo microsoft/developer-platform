@@ -44,6 +44,38 @@
             }
         },
         {
+            "label": "clean api",
+            "type": "shell",
+            "command": "dotnet",
+            "args": [
+                "clean",
+                "${workspaceFolder}/src/Microsoft.Developer.Api/Microsoft.Developer.Api.csproj",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary"
+            ],
+            "hide": true,
+            "problemMatcher": "$msCompile",
+            "presentation": {
+                "group": "build",
+            }
+        },
+        {
+            "label": "build api",
+            "type": "shell",
+            "command": "dotnet",
+            "args": [
+                "build",
+                "${workspaceFolder}/src/Microsoft.Developer.Api/Microsoft.Developer.Api.csproj",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary"
+            ],
+            "dependsOn": "clean api",
+            "problemMatcher": "$msCompile",
+            "presentation": {
+                "group": "build",
+            }
+        },
+        {
             "label": "build openapi",
             "type": "shell",
             "command": "dotnet",
