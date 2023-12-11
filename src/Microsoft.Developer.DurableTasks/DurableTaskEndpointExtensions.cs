@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
+using Microsoft.Net.Http.Headers;
 using System.Diagnostics;
 using System.Reflection;
 
@@ -156,6 +157,9 @@ public static class DurableTaskEndpointExtensions
         var location = $"{context.Request.Scheme}://{context.Request.Host}{statusRoute}/{instanceId}";
 
         var result = new DurableTaskResult(instanceId);
+
+        // Required for the client to read the Location header in CORS requests
+        context.Response.Headers.Append(HeaderNames.AccessControlExposeHeaders, HeaderNames.Location);
 
         return TypedResults.Accepted(location, result);
     }
