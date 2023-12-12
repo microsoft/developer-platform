@@ -1,6 +1,6 @@
 # Microsoft Developer Platform
 
-[![developer-platform](https://img.shields.io/github/v/release/microsoft/developer-platform?logo=github)](http://github.com/microsoft/developer-platform/releases)
+[![developer-platform](https://img.shields.io/github/v/release/microsoft/developer-platform?logo=github)](https://github.com/microsoft/developer-platform/releases)
 
 `// TODO`
 
