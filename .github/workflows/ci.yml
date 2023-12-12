@@ -5,6 +5,7 @@ on:
     branches: [main]
     paths-ignore:
       - '.vscode/**'
+      - 'deploy/**'
       - 'docs/**'
       - 'tools/**'
       - '**/*.md'
@@ -16,6 +17,7 @@ on:
     branches: [main]
     paths-ignore:
       - '.vscode/**'
+      - 'deploy/**'
       - 'docs/**'
       - 'tools/**'
       - '**/*.md'
