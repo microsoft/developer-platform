@@ -1,4 +1,4 @@
-# Microsoft Developer Platform
+# Developer Platform
 
 [![developer-platform](https://img.shields.io/github/v/release/microsoft/developer-platform?logo=github)](https://github.com/microsoft/developer-platform/releases)
 
