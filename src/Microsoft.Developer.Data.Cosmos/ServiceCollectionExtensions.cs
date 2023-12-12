@@ -1,12 +1,11 @@
 ﻿// Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
+using System.Diagnostics;
 using Microsoft.Azure.Cosmos.Fluent;
-using Microsoft.Developer.Data.CosmosDb;
 using Microsoft.Developer.Entities;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using System.Diagnostics;
 using Microsoft.Developer.Serialization.Json.Entities;
 using Microsoft.Extensions.Caching.Cosmos;
 using Microsoft.Extensions.Options;
@@ -19,7 +18,7 @@ public static class ServiceCollectionExtensions
     public static IDeveloperPlatformBuilder AddCosmos(this IDeveloperPlatformBuilder builder, IConfiguration config, bool removeTrace = true)
     {
         builder.Services
-            .AddSingleton(typeof(IDocumentRepositoryFactory<>), typeof(CosmosEntitiesRepositoryFactory<>));
+            .AddSingleton(typeof(IDocumentRepositoryFactory<>), typeof(CosmosDocumentRepositoryFactory<>));
 
         builder.Services
             .Configure<CosmosOptions>(config.GetSection(CosmosOptions.Section));

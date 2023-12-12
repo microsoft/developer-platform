@@ -2,12 +2,11 @@
 // Licensed under the MIT License.
 
 using Microsoft.Azure.Cosmos;
-using Microsoft.Developer.Data.CosmosDb;
 using Microsoft.Extensions.Options;
 
 namespace Microsoft.Developer.Data.Cosmos;
 
-internal class CosmosEntitiesRepositoryFactory<T>(IOptions<CosmosOptions> cosmosOptions, IOptionsMonitor<DocumentRepositoryOptions<T>> repositoryOptions) : IDocumentRepositoryFactory<T>
+public class CosmosDocumentRepositoryFactory<T>(IOptions<CosmosOptions> cosmosOptions, IOptionsMonitor<DocumentRepositoryOptions<T>> repositoryOptions) : IDocumentRepositoryFactory<T>
 {
     public IDocumentRepository<T> Create(string name)
         => new CosmosRepository<T>(GetContainerFactory(repositoryOptions.Get(name)));
