@@ -15,7 +15,7 @@
             "presentation": {
                 // "hidden": true,
             },
-            "preLaunchTask": "build api"
+            // "preLaunchTask": "build api"
         }
     ]
 }
