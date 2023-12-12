@@ -20,8 +20,8 @@ public static class DocumentRepositoryExtensions
     public static IDeveloperPlatformBuilder AddDocumentRepository<TImplementation, TDocument>(this IDeveloperPlatformBuilder builder, string name)
         where TImplementation : class
     {
-        builder.Services.TryAddTransient(typeof(TypedEntitiesRepositoryFactory<,>));
-        builder.Services.AddSingleton(sp => sp.GetRequiredService<TypedEntitiesRepositoryFactory<TImplementation, TDocument>>().Create(name));
+        builder.Services.TryAddTransient(typeof(TypedDocumentRepositoryFactory<,>));
+        builder.Services.AddSingleton(sp => sp.GetRequiredService<TypedDocumentRepositoryFactory<TImplementation, TDocument>>().Create(name));
 
         return builder;
     }
@@ -68,14 +68,14 @@ public static class DocumentRepositoryExtensions
         return builder;
     }
 
-    private sealed class TypedEntitiesRepositoryFactory<TRepository, TDocument>(IServiceProvider services, IDocumentRepositoryFactory<TDocument> factory)
+    private sealed class TypedDocumentRepositoryFactory<TRepository, TDocument>(IServiceProvider services, IDocumentRepositoryFactory<TDocument> factory)
     {
-        private readonly ObjectFactory entitiesRepositoryFactory = ActivatorUtilities.CreateFactory(typeof(TRepository), [typeof(IDocumentRepository<TDocument>)]);
+        private readonly ObjectFactory documentRepositoryFactory = ActivatorUtilities.CreateFactory(typeof(TRepository), [typeof(IDocumentRepository<TDocument>)]);
 
         public TRepository Create(string name)
         {
             var repository = factory.Create(name);
-            return (TRepository)entitiesRepositoryFactory(services, new[] { repository });
+            return (TRepository)documentRepositoryFactory(services, new[] { repository });
         }
     }
 }

@@ -8,8 +8,13 @@ using System.Runtime.CompilerServices;
 
 namespace Microsoft.Developer.Data.Cosmos;
 
-internal sealed class CosmosRepository<T>(Func<CancellationToken, ValueTask<Container>> containerFactory) : IDocumentRepository<T>
+public sealed class CosmosRepository<T>(Func<CancellationToken, ValueTask<Container>> containerFactory) : IDocumentRepository<T>
 {
+    private static CosmosLinqSerializerOptions GetLinqSerializerOptions() => new()
+    {
+        PropertyNamingPolicy = CosmosPropertyNamingPolicy.CamelCase
+    };
+
     private static QueryRequestOptions GetQueryRequestOptions(PartitionKey partitionKey, QueryRequestOptions? options = null)
     {
         if (options is not null)
@@ -20,8 +25,8 @@ internal sealed class CosmosRepository<T>(Func<CancellationToken, ValueTask<Cont
         return options ?? new QueryRequestOptions { PartitionKey = partitionKey };
     }
 
-    private static QueryRequestOptions GetQueryRequestOptions(string partitionKeyValue, QueryRequestOptions? options = null)
-        => GetQueryRequestOptions(GetPartitionKey(partitionKeyValue), options);
+    private static QueryRequestOptions GetQueryRequestOptions(string? partitionKeyValue, QueryRequestOptions? options = null)
+        => partitionKeyValue is null ? options ?? new QueryRequestOptions() : GetQueryRequestOptions(GetPartitionKey(partitionKeyValue), options);
 
     private static PartitionKey GetPartitionKey(string partitionKeyValue)
         => new(partitionKeyValue);
@@ -37,6 +42,7 @@ internal sealed class CosmosRepository<T>(Func<CancellationToken, ValueTask<Cont
 
         var container = await GetContainerAsync(cancellationToken)
             .ConfigureAwait(false);
+
         var response = await container
             .CreateItemAsync(entity, new(partitionId), cancellationToken: cancellationToken)
             .ConfigureAwait(false);
@@ -63,15 +69,31 @@ internal sealed class CosmosRepository<T>(Func<CancellationToken, ValueTask<Cont
         }
     }
 
-    public async IAsyncEnumerable<T> QueryAsync(string partitionId, Func<IQueryable<T>, IQueryable<T>> queryFilter, [EnumeratorCancellation] CancellationToken cancellationToken)
+    public async IAsyncEnumerable<T> QueryAsync(string? partitionId, Func<IQueryable<T>, IQueryable<T>> queryFilter, [EnumeratorCancellation] CancellationToken cancellationToken)
     {
         var container = await GetContainerAsync(cancellationToken)
             .ConfigureAwait(false);
 
         var query = container
-            .GetItemLinqQueryable<T>(requestOptions: GetQueryRequestOptions(partitionId));
+            .GetItemLinqQueryable<T>(requestOptions: GetQueryRequestOptions(partitionId), linqSerializerOptions: GetLinqSerializerOptions());
 
         await foreach (var item in queryFilter(query).ToFeedIterator().ReadAllAsync(cancellationToken: cancellationToken))
+        {
+            yield return item;
+        }
+    }
+
+    public async IAsyncEnumerable<T> QueryAsync(string? partitionId, string query, [EnumeratorCancellation] CancellationToken cancellationToken)
+    {
+        var container = await GetContainerAsync(cancellationToken)
+            .ConfigureAwait(false);
+
+        var queryDefinition = new QueryDefinition(query);
+
+        var queryIterator = container
+            .GetItemQueryIterator<T>(query, requestOptions: GetQueryRequestOptions(partitionId));
+
+        await foreach (var item in queryIterator.ReadAllAsync(cancellationToken: cancellationToken))
         {
             yield return item;
         }

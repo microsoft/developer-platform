@@ -5,7 +5,7 @@ using Microsoft.Azure.Cosmos;
 
 namespace Microsoft.Developer.Data.Cosmos;
 
-internal sealed class CosmosJsonSerializer(JsonSerializerOptions jsonSerializerOptions) : CosmosSerializer
+public sealed class CosmosJsonSerializer(JsonSerializerOptions jsonSerializerOptions) : CosmosSerializer
 {
     public override T FromStream<T>(Stream stream)
     {

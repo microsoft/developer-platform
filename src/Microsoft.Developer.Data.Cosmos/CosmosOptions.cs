@@ -1,7 +1,7 @@
 ﻿// Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-namespace Microsoft.Developer.Data.CosmosDb;
+namespace Microsoft.Developer.Data.Cosmos;
 
 public class CosmosOptions
 {
