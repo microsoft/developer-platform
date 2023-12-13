@@ -24,6 +24,7 @@
     <PackageVersion Include="Microsoft.Azure.Functions.Worker.Extensions.Http" Version="3.1.0" />
     <PackageVersion Include="Microsoft.Azure.Functions.Worker.Extensions.Http.AspNetCore" Version="1.1.1" />
     <PackageVersion Include="Microsoft.Azure.Functions.Worker.Sdk" Version="1.16.4" />
+    <PackageVersion Include="Microsoft.Extensions.Azure" Version="1.7.1" />
     <PackageVersion Include="Microsoft.Extensions.Caching.Cosmos" Version="1.6.0" />
     <PackageVersion Include="Microsoft.Extensions.Configuration" Version="8.0.0" />
     <PackageVersion Include="Microsoft.Extensions.Configuration.Abstractions" Version="8.0.0" />
