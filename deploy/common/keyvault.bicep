@@ -5,7 +5,7 @@ param name string
 param configName string
 
 var configs = {
-  'KeyVault:Endpoint': keyvault.properties.vaultUri
+  'KeyVault:VaultUri': keyvault.properties.vaultUri
 }
 
 resource keyvault 'Microsoft.KeyVault/vaults@2023-02-01' = {
