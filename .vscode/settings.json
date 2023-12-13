@@ -26,6 +26,8 @@
     "omnisharp.projectFilesExcludePattern": "**/node_modules/**,**/.git/**,**/bower_components/**,**/.local/**",
     "debug.internalConsoleOptions": "neverOpen",
     "cSpell.words": [
-        "healthchecks"
+        "healthchecks",
+        "openapi",
+        "Swashbuckle"
     ],
 }

@@ -2,16 +2,13 @@
 // Licensed under the MIT License.
 
 using Microsoft.Developer.Azure;
-using Microsoft.Developer.Data;
 using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Any;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.Swagger;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using Swashbuckle.AspNetCore.SwaggerUI;
-using System;
 using System.ComponentModel;
-using System.Diagnostics;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.Serialization;
@@ -73,7 +70,7 @@ internal static class SwaggerExtensions
                 },
                 License = new OpenApiLicense
                 {
-                    Name = "The Developer Platfom is licensed under the MIT License",
+                    Name = "The Developer Platform is licensed under the MIT License",
                     Url = new Uri("https://github.com/microsoft/developer-platform/blob/main/LICENSE")
                 }
             });
