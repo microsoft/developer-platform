@@ -9,7 +9,7 @@ namespace Microsoft.Developer.Azure;
 
 // Reworks TokenAcquirerTokenCredential from Microsoft.Identity.Web to allow passing the user in directly
 // https://github.com/AzureAD/microsoft-identity-web/blob/master/src/Microsoft.Identity.Web.Azure/TokenAcquirerTokenCredential.cs
-public class ClaimsPrincipalTokenCredential(ClaimsPrincipal user, ITokenAcquirer tokenAcquirer) : TokenCredential
+public class UserTokenCredential(ClaimsPrincipal user, ITokenAcquirer tokenAcquirer) : TokenCredential
 {
     public override AccessToken GetToken(TokenRequestContext requestContext, CancellationToken cancellationToken)
     {

@@ -76,6 +76,17 @@
             }
         },
         {
+            "label": "openapi",
+            "type": "shell",
+            "command": "echo 'openapi'",
+            "problemMatcher": [],
+            "dependsOrder": "sequence",
+            "dependsOn": [
+                "build openapi",
+                "sdk: typescript"
+            ]
+        },
+        {
             "label": "build openapi",
             "type": "shell",
             "command": "dotnet",
@@ -87,6 +98,18 @@
                 "cwd": "${workspaceFolder}/src/Microsoft.Developer.Api"
             },
             "problemMatcher": "$msCompile",
+        },
+        {
+            "label": "sdk: typescript",
+            "type": "shell",
+            "command": "npm",
+            "args": [
+                "run",
+                "openapi"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}/sdks/typescript/entities"
+            }
         }
     ]
 }
