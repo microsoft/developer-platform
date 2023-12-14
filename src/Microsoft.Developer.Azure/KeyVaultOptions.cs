@@ -7,5 +7,5 @@ public class KeyVaultOptions
 {
     public const string Section = "KeyVault";
 
-    public string Endpoint { get; set; } = string.Empty;
+    public string VaultUri { get; set; } = string.Empty;
 }

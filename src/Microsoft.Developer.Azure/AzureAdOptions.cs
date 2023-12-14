@@ -15,9 +15,7 @@ public class AzureAdOptions
 
     public string TenantId { get; set; } = string.Empty;
 
-    public string ClientSecret { get; set; } = string.Empty;
-
-    public string Audiance => $"{Instance}{TenantId}";
+    public string Audience => $"{Instance}{TenantId}";
 
     public List<ClientCredential> ClientCredentials { get; set; } = [];
 

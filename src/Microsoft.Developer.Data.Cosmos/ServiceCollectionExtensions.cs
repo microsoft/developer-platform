@@ -3,10 +3,8 @@
 
 using System.Diagnostics;
 using Microsoft.Azure.Cosmos.Fluent;
-using Microsoft.Developer.Entities;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Developer.Serialization.Json.Entities;
 using Microsoft.Extensions.Caching.Cosmos;
 using Microsoft.Extensions.Options;
 using Microsoft.Developer.Data.Cosmos;
@@ -22,12 +20,6 @@ public static class ServiceCollectionExtensions
 
         builder.Services
             .Configure<CosmosOptions>(config.GetSection(CosmosOptions.Section));
-
-        builder.AddDocumentRepository<IEntitiesRepositoryFactory, EntitiesRepositoryFactory, Entity>(nameof(Entity), options =>
-        {
-            options.DatabaseName = "Entities";
-            options.SerializerOptions = EntitySerializerOptions.Database;
-        });
 
         builder.Services
             .AddCosmosCache(options =>

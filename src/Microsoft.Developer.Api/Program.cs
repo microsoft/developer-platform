@@ -76,6 +76,7 @@ builder.Services.AddDeveloperPlatform()
         options.OneOf.Add(typeof(UserSpec));
     })
     .AddCosmos(builder.Configuration)
+    .AddCosmosEntities()
     .AddAzure(builder.Configuration)
     .AddProviders(builder.Configuration.GetSection("Providers"))
     .AddMicrosoftGraph();

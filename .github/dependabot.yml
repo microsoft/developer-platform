@@ -17,24 +17,16 @@ updates:
     labels:
       - dependabot
 
-  # - package-ecosystem: npm
-  #   directory: /web
-  #   schedule:
-  #     interval: daily
-  #     time: '05:00'
-  #     timezone: America/Los_Angeles
-  #   reviewers:
-  #     - colbylwilliams
-  #   labels:
-  #     - dependabot
-
-  - package-ecosystem: "github-actions"
+  - package-ecosystem: 'github-actions'
     # Workflow files stored in the default location of `.github/workflows`. (You don't need to specify `/.github/workflows` for `directory`. You can use `directory: "/"`.)
-    directory: "/"
+    directory: '/'
+    schedule:
+      interval: 'daily'
+      time: '05:00'
+      timezone: America/Los_Angeles
     reviewers:
       - colbylwilliams
       - twsouthwick
-    schedule:
-      interval: "daily"
-      time: '05:00'
-      timezone: America/Los_Angeles
+    labels:
+      - dependabot
+      - github_actions

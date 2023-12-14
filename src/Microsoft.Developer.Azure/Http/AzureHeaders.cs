@@ -5,7 +5,6 @@ namespace Microsoft.Developer.Azure;
 
 public static class AzureHeaders
 {
-
     public const string CorrelationRequestId = "x-ms-correlation-request-id";
 
     public const string RatelimitRemainingTenantResourceRequests = "x-ms-ratelimit-remaining-tenant-resource-requests";

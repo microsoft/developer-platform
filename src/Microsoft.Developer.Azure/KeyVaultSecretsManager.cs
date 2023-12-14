@@ -1,21 +1,18 @@
 ﻿// Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
+using Azure.Security.KeyVault.Secrets;
 using Microsoft.AspNetCore.Http;
-using Microsoft.Developer.Azure.KeyVault;
 
 namespace Microsoft.Developer;
 
-public class KeyVaultSecretsManager(IKeyVaultService keyVault) : ISecretsManager
+public class KeyVaultSecretsManager(SecretClient secrets) : ISecretsManager
 {
     public async Task<T?> GetSecretAsync<T>(string name, CancellationToken cancellationToken)
     {
         try
         {
-            var secret = await keyVault
-                .Secrets
-                .GetSecretAsync(name, cancellationToken: cancellationToken)
-                .ConfigureAwait(false);
+            var secret = await secrets.GetSecretAsync(name, cancellationToken: cancellationToken).ConfigureAwait(false);
 
             if (string.IsNullOrEmpty(secret?.Value.Value))
             {
@@ -41,14 +38,11 @@ public class KeyVaultSecretsManager(IKeyVaultService keyVault) : ISecretsManager
 
         var value = IsSimpleType<T>() ? secret.ToString() : JsonSerializer.Serialize(secret);
 
-        await keyVault
-            .Secrets
-            .SetSecretAsync(name, value, cancellationToken)
-            .ConfigureAwait(false);
+        _ = await secrets.SetSecretAsync(name, value, cancellationToken).ConfigureAwait(false);
     }
 
     public Task DeleteSecretAsync(string name, CancellationToken cancellationToken = default)
-        => keyVault.Secrets.StartDeleteSecretAsync(name, cancellationToken);
+        => secrets.StartDeleteSecretAsync(name, cancellationToken);
 
     private static bool IsSimpleType<T>() => typeof(T).IsPrimitive || typeof(T).IsValueType || (typeof(T) == typeof(string));
 }
