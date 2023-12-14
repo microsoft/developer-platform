@@ -669,9 +669,9 @@
         "type": "oauth2",
         "flows": {
           "implicit": {
-            "authorizationUrl": "https://login.microsoftonline.com/ec509c4c-6b8f-4558-a7b7-030ff99b57e0/oauth2/v2.0/authorize",
+            "authorizationUrl": "https://login.microsoftonline.com//oauth2/v2.0/authorize",
             "scopes": {
-              "api://5ae8544e-23d2-4561-a96d-d1e561a0a674/.default": "Access to the API project"
+              "api:///.default": "Access to the API project"
             }
           }
         }
@@ -681,7 +681,7 @@
   "security": [
     {
       "AADToken": [
-        "api://5ae8544e-23d2-4561-a96d-d1e561a0a674/.default"
+        "api:///.default"
       ]
     }
   ]
