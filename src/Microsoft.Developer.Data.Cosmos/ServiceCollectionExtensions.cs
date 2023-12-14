@@ -1,13 +1,12 @@
 ﻿// Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-using System.Diagnostics;
-using Microsoft.Azure.Cosmos.Fluent;
+using Microsoft.Developer.Data.Cosmos;
+using Microsoft.Extensions.Caching.Cosmos;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Caching.Cosmos;
 using Microsoft.Extensions.Options;
-using Microsoft.Developer.Data.Cosmos;
+using System.Diagnostics;
 
 namespace Microsoft.Developer.Data;
 
@@ -15,6 +14,7 @@ public static class ServiceCollectionExtensions
 {
     public static IDeveloperPlatformBuilder AddCosmos(this IDeveloperPlatformBuilder builder, IConfiguration config, bool removeTrace = true)
     {
+        builder.Services.AddTransient<CosmosBuilderFactory>();
         builder.Services
             .AddSingleton(typeof(IDocumentRepositoryFactory<>), typeof(CosmosDocumentRepositoryFactory<>));
 
@@ -29,9 +29,10 @@ public static class ServiceCollectionExtensions
             });
 
         builder.Services.AddOptions<CosmosCacheOptions>()
-            .Configure<IOptions<CosmosOptions>>((options, cosmos) =>
+            .Configure<IOptions<CosmosOptions>, CosmosBuilderFactory>((options, cosmos, factory) =>
             {
-                options.ClientBuilder = new CosmosClientBuilder(cosmos.Value.ConnectionString);
+                options.ClientBuilder = factory.GetBuilder();
+
                 options.DatabaseName = $"{cosmos.Value.DatabaseName}Cache";
             });
 

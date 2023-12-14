@@ -5,9 +5,11 @@ namespace Microsoft.Developer.Data.Cosmos;
 
 public class CosmosOptions
 {
+    public bool DangerousAcceptAnyServerCertificate { get; set; }
+
     public const string Section = "Cosmos";
 
-    public string Endpoint { get; set; } = string.Empty;
+    public string? Endpoint { get; set; }
 
     // TODO will be moved to RepositoryOptions
     public string DatabaseName { get; set; } = "MSDevs";

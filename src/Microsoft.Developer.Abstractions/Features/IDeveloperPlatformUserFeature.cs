@@ -9,5 +9,9 @@ public interface IDeveloperPlatformUserFeature
 {
     Entity Entity { get; }
 
-    MsDeveloperUserId User => new(Entity.Metadata.Uid, Entity.Metadata.Tenant);
+    MsDeveloperUserId User => new()
+    {
+        UserId = Entity.Metadata.Uid,
+        TenantId = Entity.Metadata.Tenant
+    };
 }

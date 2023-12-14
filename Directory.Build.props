@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-    <LangVersion>preview</LangVersion>
+    <LangVersion>12</LangVersion>
     <UseArtifactsOutput>true</UseArtifactsOutput>
   </PropertyGroup>
 

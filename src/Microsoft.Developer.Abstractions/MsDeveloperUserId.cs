@@ -1,8 +1,6 @@
 ﻿// Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-using System.Diagnostics.CodeAnalysis;
-
 namespace Microsoft.Developer;
 
 public class MsDeveloperUserId
@@ -17,13 +15,6 @@ public class MsDeveloperUserId
 
     public MsDeveloperUserId()
     {
-    }
-
-    [SetsRequiredMembers]
-    public MsDeveloperUserId(string userId, string tenantId)
-    {
-        UserId = userId;
-        TenantId = tenantId;
     }
 
     public static MsDeveloperUserId Parse(string id)
