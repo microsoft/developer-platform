@@ -2,23 +2,24 @@
 
 [![developer-platform](https://img.shields.io/github/v/release/microsoft/developer-platform?logo=github)](https://github.com/microsoft/developer-platform/releases)
 
-> [!IMPORTANT] 
+> [!IMPORTANT]
 > This project is currently in the incubation phase, and as such, it's important to note that aspects of the project are still under active development. We will do our best to conduct all development openly by documenting features and requirements.
 
 This repository contains the source code of the Developer Platform API for the Developer Self-service Foundation (DFS) and common components (e.g., NuGets packages) used by the Developer Platform providers.
 
-![Developer Self-service Foundation](/doc/img/self-service-foundation.svg)
+![Developer Self-service Foundation](/docs/img/self-service-foundation.svg)
 
-The Developer Platform API serves as the single point of contact for user experiences. It is the Developer Platform's contract with other systems. The API is deployed to Azure and calls the providers (sample providers are listed in the next [providers section](#providers).) 
+The Developer Platform API serves as the single point of contact for user experiences. It is the Developer Platform's contract with other systems. The API is deployed to Azure and calls the providers (sample providers are listed in the next [providers section](#providers).)
 
 ## How to deploy
 
 TODO
 
 ## Providers
+
 At its core, the Developer Self-Service Foundation (DSF) has been intentionally designed to be a “thin platform.” To add functionality, the DSF introduces the concept of a provider, which is an extension mechanism that allows independently written code to “plug in” to core capability within an IDP that is built upon the DSF. This loose coupling enables developers and platform engineers to quickly create paved paths by assembling building blocks added to the IDP through providers. To understand how providers work, please look at the [GitHub](https://github.com/microsoft/developer-platform-github) and Azure [Dev Center](https://github.com/microsoft/developer-platform-devcenter) providers as examples. These providers represent two very different implementations and will demonstrate the power and flexibility of the provider design.
 
->[!Note]
+> [!Note]
 > The provider interface is still a work in progress. While the basics are in place, the details may change, e.g. the shape of the API, etc.
 
 The developer platform will have of a number of providers that can be used “out of the box.” This is similar to VS Code, where the base “shell” is relatively sparse and handles capability that is common across the entire IDE. The true capability of the VS Code is provided by plugins, e.g. C# Dev Kit, Azure tools, that are made available via the marketplace. However, you can quickly create your own provider (or leverage others from open source) to accomplish whatever platform engineering tasks you need.
