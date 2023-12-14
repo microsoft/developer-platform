@@ -16,8 +16,12 @@ The Developer Platform API serves as the single point of contact for user experi
 TODO
 
 ## Providers
+At its core, the Developer Self-Service Foundation (DSF) has been intentionally designed to be a “thin platform.” To add functionality, the DSF introduces the concept of a provider, which is an extension mechanism that allows independently written code to “plug in” to core capability within an IDP that is built upon the DSF. This loose coupling enables developers and platform engineers to quickly create paved paths by assembling building blocks added to the IDP through providers. To understand how providers work, please look at the [GitHub](https://github.com/microsoft/developer-platform-github) and Azure [Dev Center](https://github.com/microsoft/developer-platform-devcenter) providers as examples. These providers represent two very different implementations and will demonstrate the power and flexibility of the provider design.
 
-Developer Platform providers are a set of components that encapsulates logic needed to integrate with downstream systems to support CRUD operations on entities and/or fulfullment of template-based action requests.
+>[!Note]
+> The provider interface is still a work in progress. While the basics are in place, the details may change, e.g. the shape of the API, etc.
+
+The developer platform will have of a number of providers that can be used “out of the box.” This is similar to VS Code, where the base “shell” is relatively sparse and handles capability that is common across the entire IDE. The true capability of the VS Code is provided by plugins, e.g. C# Dev Kit, Azure tools, that are made available via the marketplace. However, you can quickly create your own provider (or leverage others from open source) to accomplish whatever platform engineering tasks you need.
 
 List of sample providers and the corresponding repository containing the source codes:
 
