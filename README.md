@@ -2,9 +2,24 @@
 
 [![developer-platform](https://img.shields.io/github/v/release/microsoft/developer-platform?logo=github)](https://github.com/microsoft/developer-platform/releases)
 
-`// TODO`
+> [!IMPORTANT] 
+> This project is currently in the incubation phase, and as such, it's important to note that aspects of the project are still under active development. We will do our best to conduct all development openly by documenting features and requirements.
 
-## Repos
+This repository contains the source code of the Developer Platform API for the Developer Self-service Foundation (DFS) and common components (e.g., NuGets packages) used by the Developer Platform providers.
+
+![Developer Self-service Foundation](/doc/img/self-service-foundation.svg)
+
+The Developer Platform API serves as the single point of contact for user experiences. It is the Developer Platform's contract with other systems. The API is deployed to Azure and calls the providers (sample providers are listed in the next [providers section](#providers).) 
+
+## How to deploy
+
+TODO
+
+## Providers
+
+Developer Platform providers are a set of components that encapsulates logic needed to integrate with downstream systems to support CRUD operations on entities and/or fulfullment of template-based action requests.
+
+List of sample providers and the corresponding repository containing the source codes:
 
 | Repo                                                             | Description                                                              |                                                                                                                                                                                                         |
 | ---------------------------------------------------------------- | ------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -62,6 +77,10 @@ These nuget packages are currently hosted in a private feed. To consume them in 
   </packageSourceMapping>
 </configuration>
 ```
+
+## Additional resources
+
+For more on Platform Engineering and Developer Self-service Foundation, refer to [Microsoft Platform engineering guide](https://aka.ms/plat-eng-learn).
 
 ## Contributing
 
