@@ -39,7 +39,7 @@ jobs:
         run: dotnet pack ./Microsoft.Developer.Packages.slnf --no-build
 
       - name: Upload
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: Unsigned
           path: 'artifacts/package/release/*'
