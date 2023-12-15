@@ -1,0 +1,18 @@
+<Project>
+    <PropertyGroup>
+        <DefaultLocalDirectory>$(MSBuildThisFileDirectory)developer-platform/src/</DefaultLocalDirectory>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <LocalPackageDevelopment Include="Microsoft.Developer.Abstractions" />
+        <LocalPackageDevelopment Include="Microsoft.Developer.Azure" />
+        <LocalPackageDevelopment Include="Microsoft.Developer.Data.Cosmos" />
+        <LocalPackageDevelopment Include="Microsoft.Developer.DurableTasks" />
+        <LocalPackageDevelopment Include="Microsoft.Developer.Hosting" />
+        <LocalPackageDevelopment Include="Microsoft.Developer.Hosting.AspNetCore" />
+        <LocalPackageDevelopment Include="Microsoft.Developer.Hosting.Functions" />
+        <LocalPackageDevelopment Include="Microsoft.Developer.MSGraph" />
+        <LocalPackageDevelopment Include="Microsoft.Developer.Providers" />
+        <LocalPackageDevelopment Include="Microsoft.Developer.Serialization.Json" />
+    </ItemGroup>
+</Project>

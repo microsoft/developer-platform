@@ -1,0 +1,6 @@
+[submodule "developer-platform"]
+	path = developer-platform
+	url = https://github.com/microsoft/developer-platform
+[submodule "developer-platform-github"]
+	path = developer-platform-github
+	url = https://github.com/microsoft/developer-platform-github

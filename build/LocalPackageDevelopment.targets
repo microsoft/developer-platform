@@ -1,0 +1,13 @@
+<Project>
+    <ItemGroup>
+        <LocalPackageDevelopment Update="@(LocalPackageDevelopment->HasMetadata('HintPath')-)" Condition=" '%(LocalPackageDevelopment.HintPath)' == '' ">
+            <HintPath>$(DefaultLocalDirectory)%(LocalPackageDevelopment.Identity)/%(LocalPackageDevelopment.Identity).csproj</HintPath>
+        </LocalPackageDevelopment>
+
+        <PackageReference Update="@(LocalPackageDevelopment)">
+            <LocalDevelopment>true</LocalDevelopment>
+        </PackageReference>
+
+        <Reference Include="@(LocalPackageDevelopment)" />
+    </ItemGroup>
+</Project>
