@@ -1,13 +1,19 @@
 <Project>
     <ItemGroup>
+        <!-- Ensure there is a hint path for where the project is -->
         <LocalPackageDevelopment Update="@(LocalPackageDevelopment->HasMetadata('HintPath')-)" Condition=" '%(LocalPackageDevelopment.HintPath)' == '' ">
             <HintPath>$(DefaultLocalDirectory)%(LocalPackageDevelopment.Identity)/%(LocalPackageDevelopment.Identity).csproj</HintPath>
         </LocalPackageDevelopment>
 
+        <!-- Mark packages as being used for local development -->
         <PackageReference Update="@(LocalPackageDevelopment)">
             <LocalDevelopment>true</LocalDevelopment>
         </PackageReference>
 
+        <!-- Remove package references for things we'll be referencing locally -->
+        <PackageReference Remove="@(PackageReference)" Condition=" '%(LocalDevelopement)' == 'true' " />
+
+        <!-- Add references to the local versions -->
         <Reference Include="@(LocalPackageDevelopment)" />
     </ItemGroup>
 </Project>
