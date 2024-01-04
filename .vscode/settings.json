@@ -26,7 +26,10 @@
     "omnisharp.projectFilesExcludePattern": "**/node_modules/**,**/.git/**,**/bower_components/**,**/.local/**",
     "debug.internalConsoleOptions": "neverOpen",
     "cSpell.words": [
+        "DDCET",
+        "devcenter",
         "healthchecks",
+        "onmicrosoft",
         "openapi",
         "Swashbuckle"
     ],
