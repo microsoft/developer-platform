@@ -1,0 +1,17 @@
+[
+  {
+    "Name": "Test Provider",
+    "Projects": [
+      {
+        "Name": "src\\Microsoft.Developer.Api\\Microsoft.Developer.Api.csproj",
+        "Action": "Start",
+        "DebugTarget": "https"
+      },
+      {
+        "Name": "samples\\Microsoft.Developer.Providers.TestProvider\\Microsoft.Developer.Providers.TestProvider.csproj",
+        "Action": "Start",
+        "DebugTarget": "https"
+      }
+    ]
+  }
+]

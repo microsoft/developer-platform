@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <UserSecretsId>1726c784-891b-4493-b40c-1c18ae43affc</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Identity.Web" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Microsoft.Developer.Abstractions\Microsoft.Developer.Abstractions.csproj" />
+    <ProjectReference Include="..\..\src\Microsoft.Developer.Azure\Microsoft.Developer.Azure.csproj" />
+    <ProjectReference Include="..\..\src\Microsoft.Developer.Hosting.AspNetCore\Microsoft.Developer.Hosting.AspNetCore.csproj" />
+    <ProjectReference Include="..\..\src\Microsoft.Developer.MSGraph\Microsoft.Developer.MSGraph.csproj" />
+  </ItemGroup>
+
+</Project>

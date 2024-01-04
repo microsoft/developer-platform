@@ -6,7 +6,7 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.Developer.Data.Cosmos;
 
-public class CosmosDocumentRepositoryFactory<T>(IOptions<CosmosOptions> cosmosOptions, IOptionsMonitor<DocumentRepositoryOptions<T>> repositoryOptions) : IDocumentRepositoryFactory<T>
+internal class CosmosDocumentRepositoryFactory<T>(IOptionsMonitor<DocumentRepositoryOptions<T>> repositoryOptions, CosmosBuilderFactory builderFactory) : IDocumentRepositoryFactory<T>
 {
     public IDocumentRepository<T> Create(string name)
         => new CosmosRepository<T>(GetContainerFactory(repositoryOptions.Get(name)));
@@ -30,10 +30,9 @@ public class CosmosDocumentRepositoryFactory<T>(IOptions<CosmosOptions> cosmosOp
         {
             var serializerOptions = options.SerializerOptions ?? JsonSerializerOptions.Default;
 
-            var client = new CosmosClient(cosmosOptions.Value.ConnectionString, new CosmosClientOptions()
-            {
-                Serializer = new CosmosJsonSerializer(serializerOptions)
-            });
+            var client = builderFactory.GetBuilder()
+                .WithCustomSerializer(new CosmosJsonSerializer(serializerOptions))
+                .Build();
 
             var database = client.GetDatabase(options.DatabaseName);
             var response = await client

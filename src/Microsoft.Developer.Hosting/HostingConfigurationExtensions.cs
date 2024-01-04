@@ -22,7 +22,7 @@ public static class HostingConfigurationExtensions
 
     internal static void AddMsDeveloperConfiguration(this IConfigurationBuilder builder, string? endpoint, IHostEnvironment env)
     {
-        if (endpoint is null)
+        if (string.IsNullOrEmpty(endpoint))
         {
             return;
         }
