@@ -36,6 +36,7 @@ jobs:
     uses: ./.github/workflows/openapi.yml
 
   release:
+    if: ${{ github.event_name != 'pull_request' }}
     uses: ./.github/workflows/release.yml
     needs: [build, package, openapi]
     secrets: inherit
