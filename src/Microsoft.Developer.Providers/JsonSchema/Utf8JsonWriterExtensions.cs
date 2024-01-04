@@ -175,7 +175,7 @@ public static class Utf8JsonWriterExtensions
         writer.WriteValue(value);
     }
 
-    public static void WriteBoolianAsOneOf(this Utf8JsonWriter writer, string trueTitle, string falseTitle, string? trueDescription = null, string? falseDescription = null)
+    public static void WriteBooleanAsOneOf(this Utf8JsonWriter writer, string trueTitle, string falseTitle, string? trueDescription = null, string? falseDescription = null)
     {
         writer.WriteStartOneOfArray();
 
@@ -278,7 +278,7 @@ public static class Utf8JsonWriterExtensions
             }
             else
             {
-                throw new InvalidOperationException($"json schema input param opitons not supported on input of type {input.Type}");
+                throw new InvalidOperationException($"json schema input param options not supported on input of type {input.Type}");
             }
         }
         else if (input.Options is not null && input.Options.Count > 0)
@@ -297,7 +297,7 @@ public static class Utf8JsonWriterExtensions
             }
             else
             {
-                throw new InvalidOperationException($"json schema input param opitons not supported on input of type {input.Type}");
+                throw new InvalidOperationException($"json schema input param options not supported on input of type {input.Type}");
             }
         }
 
