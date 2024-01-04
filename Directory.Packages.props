@@ -37,7 +37,7 @@
     <PackageVersion Include="Microsoft.Extensions.Options" Version="8.0.0" />
     <PackageVersion Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="8.0.0" />
     <PackageVersion Include="Microsoft.Extensions.Options.DataAnnotations" Version="8.0.0" />
-    <PackageVersion Include="Microsoft.Graph" Version="5.36.0" />
+    <PackageVersion Include="Microsoft.Graph" Version="5.38.0" />
     <PackageVersion Include="Microsoft.Identity.Web" Version="2.16.0" />
     <PackageVersion Include="Microsoft.Identity.Web.DownstreamApi" Version="2.16.0" />
     <PackageVersion Include="Microsoft.Identity.Web.Azure" Version="2.16.0" />
